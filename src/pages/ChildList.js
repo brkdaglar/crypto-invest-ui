@@ -1,7 +1,16 @@
 import React from "react";
 import "./ChildList.css";
+import {
+  getParent,
+  getChildsFromParent,
+  addChild,
+} from "../shared/contractDeploy.js";
 
 const ChildList = () => {
+  const onClickAddChild = () => {
+    addChild("0xA745240Fe1D25819FCA6143D15139d44fD7832C4", "A", "B", 0, 0);
+  };
+
   return (
     <div id="mainpage">
       <h1>
@@ -59,7 +68,18 @@ const ChildList = () => {
           </td>
         </tr>
       </table>
-      <button class="button5"> + </button>
+      <button class="button5" onClick={getParent}>
+        {" "}
+        +{" "}
+      </button>
+      <button class="button5" onClick={getChildsFromParent}>
+        {" "}
+        -{" "}
+      </button>
+      <button class="button5" onClick={onClickAddChild}>
+        {" "}
+        addChild{" "}
+      </button>
     </div>
   );
 };

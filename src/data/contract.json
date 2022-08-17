@@ -125,7 +125,7 @@
   },
   {
     "inputs": [],
-    "name": "getChild",
+    "name": "getChildsFromParent",
     "outputs": [
       {
         "components": [
@@ -165,9 +165,9 @@
             "type": "uint256"
           }
         ],
-        "internalType": "struct LegacyContract.Child",
+        "internalType": "struct LegacyContract.Child[]",
         "name": "",
-        "type": "tuple"
+        "type": "tuple[]"
       }
     ],
     "stateMutability": "view",
