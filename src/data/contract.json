@@ -125,6 +125,96 @@
   },
   {
     "inputs": [],
+    "name": "getChild",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "addresses",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "firstName",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "lastName",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "balance",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "age",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "dateOfBirthTimeStamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "accessDateTimeStamp",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct LegacyContract.Child",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getParent",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "addresses",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "firstName",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "lastName",
+            "type": "string"
+          },
+          {
+            "internalType": "address[]",
+            "name": "childrensAddress",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "childrenSize",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct LegacyContract.Parent",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "owner",
     "outputs": [
       {
