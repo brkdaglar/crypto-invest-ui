@@ -1,18 +1,24 @@
-import logo from "./logo.svg";
-import "./App.css";
 import ChildList from "./pages/ChildList.js";
 import {
-  connectWallet,
-  addParent,
-  getParent,
-} from "./shared/contractDeploy.js";
+  HashRouter as Router,
+  Route,
+  Navigate,
+  Routes,
+} from "react-router-dom";
+import MainPage from "./pages/MainPage";
 
 function App() {
   return (
     <div>
-      <button onClick={connectWallet}>ConnectWallet</button>
-      <button onClick={addParent}> addParent </button>
-      <button onClick={getParent}> getParent </button>
+      <div>
+        <Router>
+          <Routes>
+            <Route exact path="/main" element={<MainPage />} />
+            <Route path="/" element={<Navigate replace to="/main" />} />
+            <Route path="/kids" element={<ChildList />} />
+          </Routes>
+        </Router>
+      </div>
     </div>
   );
 }
