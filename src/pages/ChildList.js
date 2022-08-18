@@ -9,6 +9,8 @@ import {
 import { Button, Modal, Form, Input, Select, DatePicker } from "antd";
 import "antd/dist/antd.css";
 import { isDisabled } from "@testing-library/user-event/dist/utils";
+import ChildsListItem from "../component/ChildListItem";
+import dayjs from "dayjs";
 
 const layout = {
   labelCol: {
@@ -67,7 +69,27 @@ const ChildList = () => {
     console.log("Failed:", errorInfo);
   };
 
-  useEffect(() => {});
+  useEffect(() => {
+    const loadChild = async () => {
+      try {
+        const res = await getChildsFromParent();
+        setChildsArray(
+          res.map((x) => ({
+            ...x,
+            balance: x.balance.toString(),
+            accessDateTimeStamp: dayjs
+              .unix(x.accessDateTimeStamp)
+              .format("DD/MM/YYYY"),
+            dateOfBirthTimeStamp: x.dateOfBirthTimeStamp.toString(),
+          }))
+        );
+        console.log(childsArray);
+      } catch {
+        console.log(console.error());
+      }
+    };
+    loadChild();
+  }, []);
 
   const onChangeDate = (date, dateString) => {
     let dateSplit = dateString.split("-");
@@ -94,7 +116,7 @@ const ChildList = () => {
       </h1>
 
       <table id="children">
-        <tr>
+        {/*<tr>
           <th>Name</th>
           <th>Surname</th>
           <th>Birth Date</th>
@@ -102,7 +124,10 @@ const ChildList = () => {
           <th> Balance </th>
           <th> </th>
           <th> </th>
-        </tr>
+        </tr>*/}
+        <div>
+          <ChildsListItem childsArray={childsArray} />
+        </div>
         {/*
         <tr>
           <td>İlkkan</td>
@@ -156,10 +181,8 @@ const ChildList = () => {
         <Modal
           title="Add Children"
           visible={isModalVisible}
-          onOk={handleOk}
-          onCancel={handleCancel}
-          cancelText={" "}
-          okText={" "}
+          footer={null}
+          onCancel={handleOk}
         >
           <Form
             {...layout}

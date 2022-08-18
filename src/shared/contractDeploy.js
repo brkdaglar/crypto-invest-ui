@@ -57,6 +57,7 @@ export const getChildsFromParent = async () => {
   console.log("getChildsFromParent");
   const childArray = await contract.getChildsFromParent();
   console.log(childArray);
+  return childArray;
 };
 
 export const getChild = async () => {
