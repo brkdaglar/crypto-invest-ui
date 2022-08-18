@@ -1,11 +1,11 @@
-import { ethers } from "ethers";
+import { ContractFactory, ethers } from "ethers";
 import abi from "../data/contract.json";
 
 export let contract;
 const CONTRACT_ADDRESS = "0x1B48129Fa3AA02d182f5e65811Cdc74D8ce554Bb";
 
 export const connectWallet = async () => {
-  console.log("a");
+  console.log("Connect Wallet");
   await window.ethereum.request({ method: "eth_requestAccounts" });
   const provider = new ethers.providers.Web3Provider(window.ethereum);
 
@@ -49,11 +49,20 @@ export const addChild = async (
   console.log(tx);
   console.log("added Child");
   const parent = await contract.getParent();
-  console.log(parent.childrenSize.toNumber());
 };
 
 export const getChildsFromParent = async () => {
   console.log("getChildsFromParent");
   const childArray = await contract.getChildsFromParent();
   console.log(childArray);
+};
+
+export const getChild = async () => {
+  console.log("getChild");
+  const child = await contract.getChild(
+    "0xA745240Fe1D25819FCA6143D15139d44fD7832C4"
+  );
+  console.log(child);
+  //console.log("Child Balance", ethers.utils.formatEther(child.balance));
+  //console.log("Child Balance", child.balance.toString());
 };

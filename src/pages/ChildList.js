@@ -1,14 +1,46 @@
-import React from "react";
+import { React, useState } from "react";
 import "./ChildList.css";
 import {
   getParent,
   getChildsFromParent,
   addChild,
+  getChild,
 } from "../shared/contractDeploy.js";
+import { DatePicker, Space } from "antd";
+import "antd/dist/antd.css";
 
 const ChildList = () => {
+  const [dateOfBirth, setDateOfBirth] = useState();
+  const [accessDateOfBirth, setAccessDateOfBirth] = useState();
+
+  const onChangeDate = (date, dateString) => {
+    let dateSplit = dateString.split("-");
+    let dateSplitYear = parseInt(dateSplit[0]) + 18;
+    dateSplit[0] = dateSplitYear.toString();
+    const accessDateString = dateSplit.join("-");
+    const birthDate = new Date(dateString);
+    const accessDate = new Date(accessDateString);
+
+    const timestampSecondsBirthDate = Math.floor(birthDate.getTime() / 1000);
+    const timestampSecondsAccessDate = Math.floor(accessDate.getTime() / 1000);
+    console.log(timestampSecondsBirthDate);
+    console.log(timestampSecondsAccessDate);
+    setDateOfBirth(timestampSecondsBirthDate);
+    setAccessDateOfBirth(timestampSecondsAccessDate);
+  };
+
   const onClickAddChild = () => {
-    addChild("0xA745240Fe1D25819FCA6143D15139d44fD7832C4", "A", "B", 0, 0);
+    addChild(
+      "0xA745240Fe1D25819FCA6143D15139d44fD7832C4",
+      "Jack",
+      "Sparrow",
+      0,
+      0
+    );
+  };
+
+  const onClickChild = () => {
+    getChild("0xA745240Fe1D25819FCA6143D15139d44fD7832C4");
   };
 
   return (
@@ -70,16 +102,22 @@ const ChildList = () => {
       </table>
       <button class="button5" onClick={getParent}>
         {" "}
-        +{" "}
+        getParent{" "}
       </button>
       <button class="button5" onClick={getChildsFromParent}>
         {" "}
-        -{" "}
+        getChildsFromParent{" "}
       </button>
       <button class="button5" onClick={onClickAddChild}>
         {" "}
         addChild{" "}
       </button>
+      <button onClick={onClickChild}> Getchild </button>
+      {/*DATE PİCKER*/}
+      <Space direction="vertical">
+        <DatePicker onChange={onChangeDate} />
+      </Space>
+      {/*---------------------*/}
     </div>
   );
 };
