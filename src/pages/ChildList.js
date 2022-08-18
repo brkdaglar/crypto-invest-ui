@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import "./ChildList.css";
 import {
   getParent,
@@ -28,6 +28,8 @@ const ChildList = () => {
     setDateOfBirth(timestampSecondsBirthDate);
     setAccessDateOfBirth(timestampSecondsAccessDate);
   };
+
+  useEffect(() => {});
 
   const onClickAddChild = () => {
     addChild(

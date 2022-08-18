@@ -21,6 +21,7 @@ export const addParent = async (_firstName, _lastName) => {
   const tx = await contract.addParent("Burak", "Daglar");
   console.log(tx);
   console.log("added");
+  console.log("");
 };
 
 export const getParent = async () => {
@@ -29,6 +30,7 @@ export const getParent = async () => {
   console.log(parent.firstName);
   console.log(parent);
   console.log("get");
+  console.log("");
 };
 
 export const addChild = async (
