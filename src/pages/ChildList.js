@@ -6,12 +6,68 @@ import {
   addChild,
   getChild,
 } from "../shared/contractDeploy.js";
-import { DatePicker, Space } from "antd";
+import { Button, Modal, Form, Input, Select, DatePicker } from "antd";
 import "antd/dist/antd.css";
+import { isDisabled } from "@testing-library/user-event/dist/utils";
+
+const layout = {
+  labelCol: {
+    span: 8,
+  },
+  wrapperCol: {
+    span: 16,
+  },
+};
+const tailLayout = {
+  wrapperCol: {
+    offset: 8,
+    span: 16,
+  },
+};
 
 const ChildList = () => {
+  const [childsArray, setChildsArray] = useState();
+
   const [dateOfBirth, setDateOfBirth] = useState();
   const [accessDateOfBirth, setAccessDateOfBirth] = useState();
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [form] = Form.useForm();
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    form.resetFields();
+    setIsModalVisible(false);
+  };
+
+  const handleOk = () => {
+    form.resetFields();
+    setIsModalVisible(false);
+  };
+
+  const onFinish = (values) => {
+    console.log("Success", values);
+    console.log(values.childFirstName);
+    addChild(
+      values.childAddress,
+      values.childFirstName,
+      values.childLastName,
+      dateOfBirth,
+      accessDateOfBirth
+    );
+    getChild(values.childAddress);
+    form.resetFields();
+    setIsModalVisible(false);
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
+
+  useEffect(() => {});
 
   const onChangeDate = (date, dateString) => {
     let dateSplit = dateString.split("-");
@@ -29,22 +85,7 @@ const ChildList = () => {
     setAccessDateOfBirth(timestampSecondsAccessDate);
   };
 
-  useEffect(() => {});
-
-  const onClickAddChild = () => {
-    addChild(
-      "0xA745240Fe1D25819FCA6143D15139d44fD7832C4",
-      "Jack",
-      "Sparrow",
-      0,
-      0
-    );
-  };
-
-  const onClickChild = () => {
-    getChild("0xA745240Fe1D25819FCA6143D15139d44fD7832C4");
-  };
-
+  // Modaldaki alttaki iki buton kaldırılamadı.
   return (
     <div id="mainpage">
       <h1>
@@ -62,6 +103,7 @@ const ChildList = () => {
           <th> </th>
           <th> </th>
         </tr>
+        {/*
         <tr>
           <td>İlkkan</td>
           <td>Kurt</td>
@@ -100,26 +142,77 @@ const ChildList = () => {
           <td>
             <button type="button">Withdraw </button>
           </td>
-        </tr>
+        </tr>*/}
       </table>
-      <button class="button5" onClick={getParent}>
-        {" "}
-        getParent{" "}
-      </button>
-      <button class="button5" onClick={getChildsFromParent}>
-        {" "}
-        getChildsFromParent{" "}
-      </button>
-      <button class="button5" onClick={onClickAddChild}>
-        {" "}
-        addChild{" "}
-      </button>
-      <button onClick={onClickChild}> Getchild </button>
-      {/*DATE PİCKER*/}
-      <Space direction="vertical">
-        <DatePicker onChange={onChangeDate} />
-      </Space>
-      {/*---------------------*/}
+      <div className="">
+        <Button
+          type="primary"
+          style={{ textAlign: "center" }}
+          onClick={showModal}
+        >
+          +
+        </Button>
+
+        <Modal
+          title="Add Children"
+          visible={isModalVisible}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          cancelText={" "}
+          okText={" "}
+        >
+          <Form
+            {...layout}
+            form={form}
+            name="control-hooks"
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+          >
+            <Form.Item
+              name="childFirstName"
+              label="Name"
+              rules={[{ required: true, message: "Please input your name!" }]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              name="childLastName"
+              label="Surname"
+              rules={[
+                { required: true, message: "Please input your surname!" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              name="childAddress"
+              label="Address"
+              rules={[
+                { required: true, message: "Please input your address!" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              name="dateOfBirth"
+              label="Date Of Birth"
+              rules={[
+                { required: true, message: "Please input your date of birth!" },
+              ]}
+            >
+              <DatePicker onChange={onChangeDate} />
+            </Form.Item>
+            <Form.Item>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Form.Item>
+          </Form>
+        </Modal>
+      </div>
     </div>
   );
 };
