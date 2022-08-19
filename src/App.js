@@ -6,6 +6,8 @@ import {
   Routes,
 } from "react-router-dom";
 import MainPage from "./pages/MainPage";
+import HomePage from "./pages/Home/Home";
+import Parent from "./pages/Parent/parent";
 
 function App() {
   return (
@@ -13,9 +15,10 @@ function App() {
       <div>
         <Router>
           <Routes>
-            <Route exact path="/main" element={<MainPage />} />
-            <Route path="/" element={<Navigate replace to="/main" />} />
             <Route path="/kids" element={<ChildList />} />
+            <Route exact path="/home" element={<HomePage />} />
+            <Route path="/" element={<Navigate replace to="/home" />} />
+            <Route exact path="/parent" element={<Parent />} />
           </Routes>
         </Router>
       </div>

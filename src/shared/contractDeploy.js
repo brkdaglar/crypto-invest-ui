@@ -1,5 +1,6 @@
 import { ContractFactory, ethers } from "ethers";
 import abi from "../data/contract.json";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 export let contract;
 const CONTRACT_ADDRESS = "0x1B48129Fa3AA02d182f5e65811Cdc74D8ce554Bb";
@@ -13,6 +14,26 @@ export const connectWallet = async () => {
 
   console.log(provider.getSigner());
   console.log(contract);
+};
+
+export const connectWalletHandler = () => {
+  let provider;
+
+  if (window.ethereum) {
+    // set ethers provider
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+
+    // connect to metamask
+    window.ethereum
+      .request({ method: "eth_requestAccounts" })
+      .then((result) => {})
+      .catch((error) => {});
+
+    contract = new ethers.Contract(CONTRACT_ADDRESS, abi, provider.getSigner());
+    console.log(contract);
+  } else if (!window.ethereum) {
+    console.log("Need to install MetaMask");
+  }
 };
 
 export const addParent = async (_firstName, _lastName) => {
