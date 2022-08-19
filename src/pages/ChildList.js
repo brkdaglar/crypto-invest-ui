@@ -80,7 +80,9 @@ const ChildList = () => {
             accessDateTimeStamp: dayjs
               .unix(x.accessDateTimeStamp)
               .format("DD/MM/YYYY"),
-            dateOfBirthTimeStamp: x.dateOfBirthTimeStamp.toString(),
+            dateOfBirthTimeStamp: dayjs
+              .unix(x.dateOfBirthTimeStamp)
+              .format("DD/MM/YYYY"),
           }))
         );
         console.log(childsArray);

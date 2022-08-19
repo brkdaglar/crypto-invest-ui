@@ -39,7 +39,7 @@ export const connectWalletHandler = () => {
 export const addParent = async (_firstName, _lastName) => {
   console.log("addParent");
   console.log(contract);
-  const tx = await contract.addParent("Burak", "Daglar");
+  const tx = await contract.addParent(_firstName, _lastName);
   console.log(tx);
   console.log("added");
   console.log("");

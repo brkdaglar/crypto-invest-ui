@@ -4,8 +4,8 @@ import "./Parent.css";
 import image from "./image.png";
 import line from "./line.png";
 import kids from "./kids.png";
-import orders from "./orders.png";
-import { Routes, Route, useNavigate } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 
 const ParentMenu = () => {
   const navigate = useNavigate();
@@ -14,10 +14,7 @@ const ParentMenu = () => {
     <div className="parentpage">
       <h1 className="h1-parent">Welcome to Crypto Legacy</h1>
       <i class="fa-brands fa-ethereum"></i>
-      <button
-        className="button button1"
-        onClick={navigate("/parent/childlist")}
-      ></button>
+      <button className="button button1" onClick={navigate("/kids")}></button>
       <button
         className="button button2"
         onClick={navigate("/parent/orders")}

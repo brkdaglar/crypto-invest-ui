@@ -3,7 +3,7 @@ import "./Home.css";
 import logo from "./logo2.svg";
 import { Button, Modal } from "antd";
 import "antd/dist/antd.css";
-import { connectWalletHandler } from "../../shared/contractDeploy";
+import { connectWalletHandler, addParent } from "../../shared/contractDeploy";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 function Home() {
@@ -17,6 +17,7 @@ function Home() {
 
   const handleOk = () => {
     connectWalletHandler();
+    addParent("Burak", "Daglar");
     navigate("../parent", { replace: true });
     setIsModalVisible(false);
   };

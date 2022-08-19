@@ -16,8 +16,7 @@ function App() {
         <Router>
           <Routes>
             <Route path="/kids" element={<ChildList />} />
-            <Route exact path="/home" element={<HomePage />} />
-            <Route path="/" element={<Navigate replace to="/home" />} />
+            <Route exact path="/" element={<HomePage />} />
             <Route exact path="/parent" element={<Parent />} />
           </Routes>
         </Router>
