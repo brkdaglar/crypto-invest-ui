@@ -5,9 +5,9 @@ import {
   Navigate,
   Routes,
 } from "react-router-dom";
-import MainPage from "./pages/MainPage";
 import HomePage from "./pages/Home/Home";
 import Parent from "./pages/Parent/parent";
+import ChildPage from "./pages/Child/ChildPage.js";
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
             <Route path="/kids" element={<ChildList />} />
             <Route exact path="/" element={<HomePage />} />
             <Route exact path="/parent" element={<Parent />} />
+            <Route exact path="/child" element={<ChildPage />} />
           </Routes>
         </Router>
       </div>

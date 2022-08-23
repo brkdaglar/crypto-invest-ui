@@ -15,9 +15,9 @@ function Home() {
     setIsModalVisible(true);
   };
 
-  const handleOk = () => {
-    connectWalletHandler();
-    addParent("Burak", "Daglar");
+  const handleOk = async () => {
+    await connectWalletHandler();
+    await addParent("Burak", "Daglar");
     navigate("../parent", { replace: true });
     setIsModalVisible(false);
   };

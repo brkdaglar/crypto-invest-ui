@@ -119,13 +119,7 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_adres",
-        "type": "address"
-      }
-    ],
+    "inputs": [],
     "name": "getChild",
     "outputs": [
       {
@@ -265,6 +259,24 @@
   {
     "inputs": [
       {
+        "internalType": "address payable",
+        "name": "_address",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "parentWithdraw",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "",
         "type": "address"
@@ -289,6 +301,19 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      }
+    ],
+    "name": "storeETH",
+    "outputs": [],
+    "stateMutability": "payable",
     "type": "function"
   }
 ]
