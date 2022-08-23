@@ -1,9 +1,12 @@
+
+import React, { useState, useEffect } from "react";
 import { ContractFactory, ethers } from "ethers";
 import abi from "../data/contract.json";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 export let contract;
 const CONTRACT_ADDRESS = "0x1B48129Fa3AA02d182f5e65811Cdc74D8ce554Bb";
+
 
 export const connectWallet = async () => {
   console.log("Connect Wallet");
@@ -16,7 +19,7 @@ export const connectWallet = async () => {
   console.log(contract);
 };
 
-export const connectWalletHandler = () => {
+export const connectWalletHandler = async () => {
   let provider;
 
   if (window.ethereum) {
@@ -24,35 +27,52 @@ export const connectWalletHandler = () => {
     provider = new ethers.providers.Web3Provider(window.ethereum);
 
     // connect to metamask
-    window.ethereum
+    await window.ethereum
       .request({ method: "eth_requestAccounts" })
-      .then((result) => {})
-      .catch((error) => {});
+      .then((result) => { })
+      .catch((error) => { });
 
     contract = new ethers.Contract(CONTRACT_ADDRESS, abi, provider.getSigner());
-    console.log(contract);
+    const userAddress = await provider.getSigner().getAddress();
+
+    const roleValue = addressControl(userAddress);
+
+    return roleValue;
+
   } else if (!window.ethereum) {
     console.log("Need to install MetaMask");
   }
 };
 
+export const addressControl = async (_address) => {
+  const tx = await contract.addressControl(_address);
+  return tx;
+}
+
 export const addParent = async (_firstName, _lastName) => {
-  console.log("addParent");
-  console.log(contract);
-  const tx = await contract.addParent(_firstName, _lastName);
-  console.log(tx);
-  console.log("added");
-  console.log("");
+  try {
+    const tx = await contract.addParent(_firstName, _lastName);
+    //console.log(tx);
+  } catch (e) {
+    if (e.reason.includes("user_already_exists")) {
+      console.log("Kullanıcı zaten kayıtlı!");
+    } else {
+      console.log("Beklenmedik hata: ", e);
+    }
+  }
+
 };
 
 export const getParent = async () => {
-  console.log("getParent");
   const parent = await contract.getParent();
-  console.log(parent.firstName);
-  console.log(parent);
-  console.log("get");
-  console.log("");
+  console.log("parent, ", parent);
+  return parent;
 };
+
+export const getChild = async () => {
+  const child = await contract.getChild();
+  return child;
+}
 
 export const addChild = async (
   _adres,
@@ -81,7 +101,7 @@ export const getChildsFromParent = async () => {
   return childArray;
 };
 
-export const getChild = async () => {
+/*export const getChild = async () => {
   console.log("getChild");
   const child = await contract.getChild(
     "0xA745240Fe1D25819FCA6143D15139d44fD7832C4"
@@ -89,4 +109,4 @@ export const getChild = async () => {
   console.log(child);
   //console.log("Child Balance", ethers.utils.formatEther(child.balance));
   //console.log("Child Balance", child.balance.toString());
-};
+};*/

@@ -3,30 +3,55 @@ import "./Home.css";
 import logo from "./logo2.svg";
 import { Button, Modal } from "antd";
 import "antd/dist/antd.css";
-import { connectWalletHandler, addParent } from "../../shared/contractDeploy";
+import { connectWalletHandler, addParent, getParent, getChild } from "../../shared/contractDeploy";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import { Spin } from 'antd';
 
 function Home() {
   // MODAL
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalWait, setIsModalWait] = useState(false);
+  const [user, setUser] = useState();
+
+  const [name, setName] = useState();
+  const [surname, setSurname] = useState();
   let navigate = useNavigate();
 
-  const showModal = () => {
-    setIsModalVisible(true);
+  const Role = {
+    admin: 0,
+    child: 1,
+    parent: 2,
+    unregister: 3
+  }
+
+  const showModal = async () => {
+    const roleValue = await connectWalletHandler();
+    console.log(roleValue);
+
+    if (roleValue === Role.unregister) {
+      setIsModalVisible(true);
+    } else if (roleValue === Role.parent) {
+      navigate("../parent", { replace: true });
+    } else if (roleValue === Role.child) {
+      navigate("../child", { replace: true })
+    }
   };
 
-  const handleOk = () => {
-    connectWalletHandler();
-    addParent("Burak", "Daglar");
-    navigate("../parent", { replace: true });
+  const handleOk = async () => {
+    await addParent(name, surname);
     setIsModalVisible(false);
+    setIsModalWait(true);
+    setTimeout(() => {
+      navigate("../parent", { replace: true });
+      setIsModalWait(false);
+    }, 10000)
+
+    
   };
 
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-
-  const [name, setName] = useState(null);
 
   return (
     <div className="home">
@@ -42,6 +67,7 @@ function Home() {
         onOk={handleOk}
         onCancel={handleCancel}
       >
+        {/* Burası çıkan pop up formu */}
         <form>
           <h4>
             You will be connected your metamask account.Dou you want to
@@ -52,12 +78,24 @@ function Home() {
             type="text"
             onChange={(event) => {
               setName(event.target.value);
-              console.log(name);
+
             }}
           />
           <label> Surname : </label>
-          <input type="text" />
+          <input type="text"
+            onChange={(event) => {
+              setSurname(event.target.value);
+
+            }} />
         </form>
+      </Modal>
+      <Modal
+        className="modal"
+        title="Waiting"
+        visible={isModalWait}
+      >
+        <Spin />
+
       </Modal>
     </div>
   );

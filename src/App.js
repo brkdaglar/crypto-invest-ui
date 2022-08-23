@@ -7,7 +7,8 @@ import {
 } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import HomePage from "./pages/Home/Home";
-import Parent from "./pages/Parent/parent";
+import Parent from "./pages/Parent/Parent";
+import ChildPage from "./pages/child/Child.js";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Routes>
             <Route path="/kids" element={<ChildList />} />
             <Route exact path="/" element={<HomePage />} />
+            <Route exact path="/child" element={<ChildPage />} />
             <Route exact path="/parent" element={<Parent />} />
           </Routes>
         </Router>
