@@ -1,0 +1,15 @@
+.ok {
+    background-color: #2a67a3;
+    padding: 5px;
+}
+h1 {
+    left: 20px;
+    font-weight:900;
+    
+    font-style:inherit; 
+    color:black;}
+img{
+    width: 150px;
+    height: 150px;
+    
+}
