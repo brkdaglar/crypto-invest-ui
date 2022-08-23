@@ -6,17 +6,6 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 export let contract;
 const CONTRACT_ADDRESS = "0x1B48129Fa3AA02d182f5e65811Cdc74D8ce554Bb";
 
-export const connectWallet = async () => {
-  console.log("Connect Wallet");
-  await window.ethereum.request({ method: "eth_requestAccounts" });
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-
-  contract = new ethers.Contract(CONTRACT_ADDRESS, abi, provider.getSigner());
-
-  console.log(provider.getSigner());
-  console.log(contract);
-};
-
 export const connectWalletHandler = async () => {
   let provider;
 
