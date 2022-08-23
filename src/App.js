@@ -17,6 +17,7 @@ function App() {
           <Routes>
             <Route path="/kids" element={<ChildList />} />
             <Route exact path="/" element={<HomePage />} />
+            <Route exact path="/child" element={<ChildPage />} />
             <Route exact path="/parent" element={<Parent />} />
             <Route exact path="/child" element={<ChildPage />} />
           </Routes>

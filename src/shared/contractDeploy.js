@@ -1,10 +1,21 @@
+import React, { useState, useEffect } from "react";
 import { ContractFactory, ethers } from "ethers";
 import abi from "../data/contract.json";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 export let contract;
-
 const CONTRACT_ADDRESS = "0x1B48129Fa3AA02d182f5e65811Cdc74D8ce554Bb";
+
+export const connectWallet = async () => {
+  console.log("Connect Wallet");
+  await window.ethereum.request({ method: "eth_requestAccounts" });
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+  contract = new ethers.Contract(CONTRACT_ADDRESS, abi, provider.getSigner());
+
+  console.log(provider.getSigner());
+  console.log(contract);
+};
 
 export const connectWalletHandler = async () => {
   let provider;
@@ -15,31 +26,44 @@ export const connectWalletHandler = async () => {
     console.log(contract);
 
     // connect to metamask
-    await window.ethereum.request({ method: "eth_requestAccounts" });
+    await window.ethereum
+      .request({ method: "eth_requestAccounts" })
+      .then((result) => {})
+      .catch((error) => {});
 
     contract = new ethers.Contract(CONTRACT_ADDRESS, abi, provider.getSigner());
-    console.log(contract);
+    const userAddress = await provider.getSigner().getAddress();
+
+    const roleValue = addressControl(userAddress);
+
+    return roleValue;
   } else if (!window.ethereum) {
     console.log("Need to install MetaMask");
   }
 };
 
+export const addressControl = async (_address) => {
+  const tx = await contract.addressControl(_address);
+  return tx;
+};
+
 export const addParent = async (_firstName, _lastName) => {
-  console.log("addParent");
-  console.log(contract);
-  const tx = await contract.addParent(_firstName, _lastName);
-  console.log(tx);
-  console.log("added");
-  console.log("");
+  try {
+    const tx = await contract.addParent(_firstName, _lastName);
+    //console.log(tx);
+  } catch (e) {
+    if (e.reason.includes("user_already_exists")) {
+      console.log("Kullanıcı zaten kayıtlı!");
+    } else {
+      console.log("Beklenmedik hata: ", e);
+    }
+  }
 };
 
 export const getParent = async () => {
-  console.log("getParent");
   const parent = await contract.getParent();
-  console.log(parent.firstName);
-  console.log(parent);
-  console.log("get");
-  console.log("");
+  console.log("parent, ", parent);
+  return parent;
 };
 
 export const addChild = async (
