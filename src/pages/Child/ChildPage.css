@@ -36,24 +36,36 @@ h3 {color: white;
 }
 
 #bigetherimage{
+    height: 150px;
+    width: 150px;
+    align-items: center;
+    margin: 10px;
     position: absolute;
-    left: 25%;
-    top: 20%;
+    margin-top: 150px;
+    left: 450px;
+    border-radius: 5cm;  
 }
 
 #dateimage{
-    position: absolute;
-    left: 57%;
-    top: 20%;
+  height: 150px;
+  width: 150px;
+  align-items: center;
+  margin: 10px;
+  position: absolute;
+  margin-top: 150px;
+  left: 850px;
+  border-radius: 5cm;
 }
 .buttonwithdraw {
-    border-radius: 25%;
+    border-radius: 5cm;
     position: absolute;
-    left: 47.5%;
-    top: 80%;
-    background-color: white; 
-    color: black; 
+    background-color: #F89C35;
+    color: white; 
     border: 2px solid #4CAF50;
+    right: 700px;
+    left: 630px;
+    bottom: 120px;
+    font-size: 25px;
   }
   .buttonwithdraw:hover {
     background-color: #4CAF50;

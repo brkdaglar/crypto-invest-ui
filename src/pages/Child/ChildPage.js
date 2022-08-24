@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { getChild } from "../../shared/contractDeploy";
 import "./ChildPage.css";
 import dayjs from "dayjs";
+import wallet from "./wallet.JPG";
+import calender from "./calender.PNG"
 
 const ChildPage = () => {
   const [child, setChild] = useState({});
@@ -33,28 +35,26 @@ const ChildPage = () => {
 
   return (
     <div className="ChildPage">
-      <h1>Welcome to Crypto Legacy</h1>
-      <h3>
+      <div className="divProfile">
+        <img src={require("../Parent/image.png")} width="150px" height="150px" />
+        <h3>
         {console.log("Gelen child:", child)}
         {child.firstName} {child.lastName}
       </h3>
+        <div style={{ height: "7px", backgroundColor: "white", borderRadius: 5 }} />
+      </div>
+      
       <p id="firstparagraph">{child.balance}</p>
       <p id="secondparagraph">{child.accessDateTimeStamp}</p>
       <img
-        id="etherimage"
-        src="https://icons.iconarchive.com/icons/cjdowner/cryptocurrency-flat/256/Ethereum-ETH-icon.png"
-        width="100"
-        height="100"
-      ></img>
-      <img
         id="bigetherimage"
-        src="https://icons-for-free.com/iconfiles/png/512/eth+ethcoin+etherium+icon-1320162857971241492.png"
+        src={wallet}
         width="300"
         height="300"
       ></img>
       <img
         id="dateimage"
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Blank_Calendar_page_icon.svg/1693px-Blank_Calendar_page_icon.svg.png"
+        src={calender}
         width="300"
         height="300"
       ></img>
