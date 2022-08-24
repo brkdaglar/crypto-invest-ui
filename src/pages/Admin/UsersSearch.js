@@ -3,35 +3,11 @@ import { SearchOutlined } from "@ant-design/icons";
 import { Button, Input, Space, Table, PageHeader } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { getAllParents, getAllUsers } from "../../shared/contractDeploy";
+import {
+  getChildsFromParentWithAddress,
+  getAllUser,
+} from "../../shared/contractDeploy";
 /* import "./UsersSearch.css"; */
-
-const data = [
-  {
-    key: "1",
-    userkey: "65dfs5fd6s6fds6dfs67",
-    role: "Parent",
-    transactions: "https://etherscan.io/",
-  },
-  {
-    key: "2",
-    userkey: "s6fds7fdysfdusufdds9",
-    role: "Child",
-    transactions: Link,
-  },
-  {
-    key: "3",
-    userkey: "skjjhksd7866786786",
-    role: "Parent",
-    transactions: Link,
-  },
-  {
-    key: "4",
-    userkey: "hajkds87d687687as",
-    role: "Child",
-    transactions: Link,
-  },
-];
 
 const UsersSearch = () => {
   const [searchText, setSearchText] = useState("");
@@ -130,28 +106,53 @@ const UsersSearch = () => {
   useEffect(() => {
     const loadUsers = async () => {
       try {
-        const res = await getAllParents();
-        setAllUsers(res.map((x) => ({})));
-      } catch {}
+        console.log("a");
+        const res = await getAllUser();
+        console.log(res);
+        setAllUsers(res);
+      } catch (e) {
+        console.error(e);
+      }
     };
     loadUsers();
-  });
+  }, []);
 
   const columns = [
     {
       title: "Name",
       dataIndex: "firstName",
       key: "firstName",
+      ...getColumnSearchProps("firstName"),
     },
     {
       title: "Surname",
       dataIndex: "lastName",
       key: "lastName",
+      ...getColumnSearchProps("lastName"),
     },
     {
       title: "Address",
       dataIndex: "addresses",
       key: "addresses",
+      ...getColumnSearchProps("addresses"),
+    },
+  ];
+
+  const childColumns = [
+    {
+      dataIndex: "firstName",
+      key: "firstName",
+      ...getColumnSearchProps("firstName"),
+    },
+    {
+      dataIndex: "lastName",
+      key: "lastName",
+      ...getColumnSearchProps("lastName"),
+    },
+    {
+      dataIndex: "addresses",
+      key: "addresses",
+      ...getColumnSearchProps("addresses"),
     },
   ];
   return (
@@ -163,6 +164,23 @@ const UsersSearch = () => {
       </div>
 
       <Table columns={columns} dataSource={allUsers || []} />
+      <div> Yeni</div>
+      <Table
+        columns={columns}
+        expandable={{
+          expandedRowRender: (record) => (
+            <p
+              style={{
+                margin: 0,
+              }}
+            >
+              <Table columns={childColumns} dataSource={allUsers || []} />
+            </p>
+          ),
+          rowExpandable: (record) => record.firstName !== "Not Expandable",
+        }}
+        dataSource={allUsers || []}
+      />
     </div>
   );
 };

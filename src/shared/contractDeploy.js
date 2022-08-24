@@ -88,10 +88,10 @@ export const getChild = async (_adres) => {
   return child;
 };
 
-export const getAllParents = async () => {
+export const getAllParent = async () => {
   console.log("getAllParents");
   console.log(contract);
-  const allParents = await contract.getAllParents();
+  const allParents = await contract.getAllParent();
   console.log(allParents);
   console.log("gettedAllParents");
   return allParents;
@@ -99,16 +99,24 @@ export const getAllParents = async () => {
 
 export const getAllChild = async () => {
   console.log("getAllChild");
-  const allChilds = await contract.getAllChilds();
+  const allChilds = await contract.getAllChild();
   console.log(allChilds);
   console.log("gettedAllChild");
   return allChilds;
 };
 
-export const getAllUsers = async () => {
+export const getAllUser = async () => {
   console.log("getAllUsers");
-  let allUsers = await getAllParents();
-  allUsers = [...(await getAllChild())];
+  let allUsers = await getAllParent();
+  allUsers = [...allUsers, ...(await getAllChild())];
+
   console.log(allUsers);
   return allUsers;
+};
+
+export const getChildsFromParentWithAddress = async (_address) => {
+  console.log("getChilddsFromParent");
+  const childParent = await getChildsFromParentWithAddress(_address);
+  console.log(childParent);
+  return childParent;
 };
