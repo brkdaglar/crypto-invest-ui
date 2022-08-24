@@ -87,3 +87,28 @@ export const getChild = async (_adres) => {
   console.log("gettedChild");
   return child;
 };
+
+export const getAllParents = async () => {
+  console.log("getAllParents");
+  console.log(contract);
+  const allParents = await contract.getAllParents();
+  console.log(allParents);
+  console.log("gettedAllParents");
+  return allParents;
+};
+
+export const getAllChild = async () => {
+  console.log("getAllChild");
+  const allChilds = await contract.getAllChilds();
+  console.log(allChilds);
+  console.log("gettedAllChild");
+  return allChilds;
+};
+
+export const getAllUsers = async () => {
+  console.log("getAllUsers");
+  let allUsers = await getAllParents();
+  allUsers = [...(await getAllChild())];
+  console.log(allUsers);
+  return allUsers;
+};

@@ -8,6 +8,7 @@ import {
 import HomePage from "./pages/Home/Home";
 import Parent from "./pages/Parent/parent";
 import ChildPage from "./pages/Child/ChildPage.js";
+import MainPage from "./pages/MainPage.js";
 
 function App() {
   return (
@@ -17,9 +18,9 @@ function App() {
           <Routes>
             <Route path="/kids" element={<ChildList />} />
             <Route exact path="/" element={<HomePage />} />
-            <Route exact path="/child" element={<ChildPage />} />
             <Route exact path="/parent" element={<Parent />} />
             <Route exact path="/child" element={<ChildPage />} />
+            <Route exact path="/admin" element={<MainPage />} />
           </Routes>
         </Router>
       </div>

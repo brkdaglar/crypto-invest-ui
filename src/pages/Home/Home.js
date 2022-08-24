@@ -39,6 +39,8 @@ function Home() {
       navigate("../parent", { replace: true });
     } else if (roleValue === Role.child) {
       navigate("../child", { replace: true });
+    } else if (roleValue === Role.admin) {
+      navigate("../admin", { replace: true });
     }
   };
 
