@@ -23,11 +23,6 @@
       },
       {
         "internalType": "uint256",
-        "name": "_dateOfBirthTimeStamp",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
         "name": "_accessDateTimeStamp",
         "type": "uint256"
       }
@@ -106,11 +101,6 @@
       },
       {
         "internalType": "uint256",
-        "name": "dateOfBirthTimeStamp",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
         "name": "accessDateTimeStamp",
         "type": "uint256"
       }
@@ -142,11 +132,6 @@
           {
             "internalType": "uint256",
             "name": "balance",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "dateOfBirthTimeStamp",
             "type": "uint256"
           },
           {
@@ -226,11 +211,6 @@
           },
           {
             "internalType": "uint256",
-            "name": "dateOfBirthTimeStamp",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
             "name": "accessDateTimeStamp",
             "type": "uint256"
           }
@@ -267,11 +247,6 @@
           {
             "internalType": "uint256",
             "name": "balance",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "dateOfBirthTimeStamp",
             "type": "uint256"
           },
           {
@@ -318,11 +293,6 @@
           {
             "internalType": "uint256",
             "name": "balance",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "dateOfBirthTimeStamp",
             "type": "uint256"
           },
           {

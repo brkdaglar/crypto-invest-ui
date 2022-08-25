@@ -4,7 +4,7 @@ import abi from "../data/contract.json";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 export let contract;
-const CONTRACT_ADDRESS = "0x1B48129Fa3AA02d182f5e65811Cdc74D8ce554Bb";
+const CONTRACT_ADDRESS = "0x5f6799dee1d9576168fd91e2631fbe3111b72062";
 
 export const connectWalletHandler = async () => {
   let provider;
@@ -55,19 +55,12 @@ export const getParent = async () => {
   return parent;
 };
 
-export const addChild = async (
-  _adres,
-  _firstName,
-  _lastName,
-  _dateOfBirth,
-  _accessDate
-) => {
+export const addChild = async (_adres, _firstName, _lastName, _accessDate) => {
   console.log("addChild");
   const tx = await contract.addChild(
     _adres,
     _firstName,
     _lastName,
-    _dateOfBirth,
     _accessDate
   );
   console.log("added Child");
@@ -115,8 +108,8 @@ export const getAllUser = async () => {
 };
 
 export const getChildsFromParentWithAddress = async (_address) => {
-  console.log("getChilddsFromParent");
-  const childParent = await getChildsFromParentWithAddress(_address);
+  console.log("getChildsFromParent");
+  const childParent = await contract.getChildsFromParentWithAddress(_address);
   console.log(childParent);
   return childParent;
 };

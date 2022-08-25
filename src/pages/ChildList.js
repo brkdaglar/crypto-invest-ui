@@ -30,7 +30,6 @@ const tailLayout = {
 const ChildList = () => {
   const [childsArray, setChildsArray] = useState();
 
-  const [dateOfBirth, setDateOfBirth] = useState();
   const [accessDateOfBirth, setAccessDateOfBirth] = useState();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -57,7 +56,6 @@ const ChildList = () => {
       values.childAddress,
       values.childFirstName,
       values.childLastName,
-      dateOfBirth,
       accessDateOfBirth
     );
     getChild(values.childAddress);
@@ -80,9 +78,6 @@ const ChildList = () => {
             accessDateTimeStamp: dayjs
               .unix(x.accessDateTimeStamp)
               .format("DD/MM/YYYY"),
-            dateOfBirthTimeStamp: dayjs
-              .unix(x.dateOfBirthTimeStamp)
-              .format("DD/MM/YYYY"),
           }))
         );
         console.log(childsArray);
@@ -94,18 +89,10 @@ const ChildList = () => {
   }, []);
 
   const onChangeDate = (date, dateString) => {
-    let dateSplit = dateString.split("-");
-    let dateSplitYear = parseInt(dateSplit[0]) + 18;
-    dateSplit[0] = dateSplitYear.toString();
-    const accessDateString = dateSplit.join("-");
-    const birthDate = new Date(dateString);
-    const accessDate = new Date(accessDateString);
+    const accessDate = new Date(dateString);
 
-    const timestampSecondsBirthDate = Math.floor(birthDate.getTime() / 1000);
     const timestampSecondsAccessDate = Math.floor(accessDate.getTime() / 1000);
-    console.log(timestampSecondsBirthDate);
     console.log(timestampSecondsAccessDate);
-    setDateOfBirth(timestampSecondsBirthDate);
     setAccessDateOfBirth(timestampSecondsAccessDate);
   };
 
@@ -173,10 +160,13 @@ const ChildList = () => {
             </Form.Item>
 
             <Form.Item
-              name="dateOfBirth"
-              label="Date Of Birth"
+              name="accessDate"
+              label="Access Date"
               rules={[
-                { required: true, message: "Please input your date of birth!" },
+                {
+                  required: true,
+                  message: "Please input your date of access!",
+                },
               ]}
             >
               <DatePicker onChange={onChangeDate} />
