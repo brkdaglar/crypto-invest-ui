@@ -3,7 +3,7 @@ import { getChild, childWithdraw } from "../../shared/contractDeploy";
 import "./ChildPage.css";
 import dayjs from "dayjs";
 import ProfileComponent from "../../component/ProfileComponent";
-import { Button } from 'antd';
+import { Button } from "antd";
 
 const ChildPage = () => {
   const [child, setChild] = useState({});
@@ -26,9 +26,11 @@ const ChildPage = () => {
             .format("DD/MM/YYYY"),
         });
         setDate(dayjs().unix());
-        if (dayjs().unix() >= res.accessDateTimeStamp.toNumber()) {
+        let balanceString = parseInt(res.balance.toString());
+        if (date >= res.accessDateTimeStamp.toNumber() && balanceString > 0) {
           console.log("girdi");
-          isActive(false)
+          console.log(balanceString);
+          isActive(false);
         }
       } catch (e) {
         console.error(e);
@@ -47,9 +49,15 @@ const ChildPage = () => {
         </div>
         <div id="divButton">
           {console.log(active)}
-          <Button type="primary" onClick={async () => {
-            await childWithdraw(date)
-          }} disabled={active}>Withdraw</Button>
+          <Button
+            type="primary"
+            onClick={async () => {
+              await childWithdraw(date);
+            }}
+            disabled={active}
+          >
+            Withdraw
+          </Button>
         </div>
         <div id="divDate">
           <div id="date" />
@@ -57,7 +65,6 @@ const ChildPage = () => {
         </div>
       </div>
     </div>
-
   );
 };
 

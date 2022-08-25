@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import { Space, Table, Tag } from "antd";
-import Modal from "react-modal";
 
 import Send from "./SendPopup";
 import Withdraw from "./WithdrawPopup";
