@@ -8,6 +8,7 @@ import { getParent } from "../../shared/contractDeploy";
 
 
 import { useNavigate, useLocation } from "react-router-dom";
+import ProfileComponent from "../../component/ProfileComponent";
 
 const ParentMenu = () => {
   const navigate = useNavigate();
@@ -26,21 +27,17 @@ const ParentMenu = () => {
 
   return (
     <div className="root">
-      <div className="divProfile">
-        <img src={require("./image.png")} width="150px" height="150px" />
-        <h4>{parent != undefined ? parent.firstName : "gelmedi"} {parent != undefined ? parent.lastName : "gelmedi"}</h4>
-        <div style={{ height: "7px", backgroundColor: "white", borderRadius: 5 }} />
-      </div>
-      <div className="div">
-        <div id="divOrders" className="divButton">
-          <button id="orders"
-            onClick={() => navigate("/parent/orders")} />
-          <h4>Orders</h4>
-        </div>
+      <ProfileComponent />
+      <div className="divParent">
         <div id="divKids" className="divButton">
           <button id="kids"
             onClick={() => navigate("/kids")} />
           <h4>Kids</h4>
+        </div>
+        <div id="divOrders" className="divButton">
+          <button id="orders"
+            onClick={() => navigate("/parent/orders")} />
+          <h4>Orders</h4>
         </div>
       </div>
       {/* {console.log("Gelen parent:", parent)}

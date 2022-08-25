@@ -101,7 +101,7 @@ const ChildList = () => {
     <div id="mainpage">
       <h1>
         {" "}
-        <ins> CHİLDREN </ins>{" "}
+        <ins> CHILDREN </ins>{" "}
       </h1>
 
       <table id="children">

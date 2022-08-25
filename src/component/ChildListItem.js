@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import { Space, Table, Tag } from "antd";
+import Modal from "react-modal";
+
+import Send from "./SendPopup";
+import Withdraw from "./WithdrawPopup";
 
 const ChildsListItem = (props) => {
   const { childsArray } = props;
+  const [getArray, setGetArray] = useState();
 
+  const getParentObj = async () => {
+    setGetArray(childsArray);
+  };
+
+  useEffect(() => {
+    getParentObj();
+  }, []);
   console.log("child:", childsArray);
 
   const columns = [
@@ -40,19 +52,27 @@ const ChildsListItem = (props) => {
     },
     {
       width: 1,
-      render: () => {
-        return <button>Withdraw</button>;
+      render: (_, record) => {
+        return <Withdraw balance={record.balance} address={record.addresses} />;
       },
     },
     {
       width: 1,
-      render: () => {
-        return <button>Send</button>;
+      render: (_, record) => {
+        return (
+          <>
+            <Send address={record.addresses} />
+          </>
+        );
       },
     },
   ];
 
-  return <Table columns={columns} dataSource={childsArray || []} />;
+  return (
+    <>
+      <Table columns={columns} dataSource={childsArray || []} />
+    </>
+  );
 };
 
 export default ChildsListItem;

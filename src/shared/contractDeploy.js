@@ -4,7 +4,7 @@ import abi from "../data/contract.json";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 export let contract;
-const CONTRACT_ADDRESS = "0x5f6799dee1d9576168fd91e2631fbe3111b72062";
+const CONTRACT_ADDRESS = "0x1B48129Fa3AA02d182f5e65811Cdc74D8ce554Bb";
 
 export const connectWalletHandler = async () => {
   let provider;
@@ -12,7 +12,6 @@ export const connectWalletHandler = async () => {
   if (window.ethereum) {
     // set ethers provider
     provider = new ethers.providers.Web3Provider(window.ethereum);
-    console.log(contract);
 
     // connect to metamask
     await window.ethereum
@@ -51,7 +50,6 @@ export const addParent = async (_firstName, _lastName) => {
 
 export const getParent = async () => {
   const parent = await contract.getParent();
-  console.log("parent, ", parent);
   return parent;
 };
 
@@ -79,6 +77,23 @@ export const getChild = async (_adres) => {
   console.log(child);
   console.log("gettedChild");
   return child;
+};
+
+export const storeETH = async (address, amount) => {
+  console.log(address, " ", amount);
+  const store = await contract.storeETH(address, { value: amount });
+  console.log(store);
+};
+
+export const parentWithdraw = async (address, amount) => {
+  console.log(address, " ", amount);
+  const withdraw = await contract.parentWithdraw(address, amount);
+  console.log(withdraw);
+};
+
+export const childWithdraw = async (date) => {
+  const withdraw = await contract.childWithdraw(date);
+  console.log(withdraw);
 };
 
 export const getAllParent = async () => {

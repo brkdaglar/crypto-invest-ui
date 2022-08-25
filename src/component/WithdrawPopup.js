@@ -1,6 +1,8 @@
 import "antd/dist/antd.css";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Button, Modal, Form, Input, Select, DatePicker } from "antd";
+import {  getParent,parentWithdraw } from "../shared/contractDeploy";
+
 
 const layout = {
   labelCol: {
@@ -17,16 +19,29 @@ const tailLayout = {
   },
 };
 
-const WithdrawPopup = () => {
+const WithdrawPopup = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
+  const [parent, setParent] = useState();
+  const [amount, setAmount] = useState();
+
+  const getParentObj = async () => {
+    console.log("parent: ", parent);
+    setParent(await getParent());
+  }
+
+  useEffect(() => {
+    getParentObj();
+  }, []);
 
   const showModal = () => {
     setIsModalVisible(true);
   };
 
-  const handleOk = (values) => {
-    form.required();
+  const handleOk = async () => {
+    await parentWithdraw(props.address, amount);
+    form.resetFields();
+    setIsModalVisible(false);
   };
 
   const handleCancel = () => {
@@ -41,7 +56,7 @@ const WithdrawPopup = () => {
 
   return (
     <div>
-      <Button type="primary" onClick={showModal}>
+      <Button type="primary" onClick={()=>showModal()}>
         Withdraw
       </Button>
 
@@ -59,18 +74,19 @@ const WithdrawPopup = () => {
             label="Balance"
             rules={[{ required: true }]}
           >
-            <Input />
+            <Input disabled={true} placeholder={props.balance} />
           </Form.Item>
 
           <Form.Item
             name="Amount"
             label="Amount"
+            
             rules={[{ required: true, message: "Please input your amount!" }]}
           >
-            <Input />
+            <Input onChange={(e) => setAmount(e.target.value)} type="number"/>
           </Form.Item>
 
-          <Form.Item
+          {/* <Form.Item
             name="Name"
             label="Name"
             rules={[{ required: true, message: "Please input your name!" }]}
@@ -84,14 +100,14 @@ const WithdrawPopup = () => {
             rules={[{ required: true, message: "Please input your surname!" }]}
           >
             <Input />
-          </Form.Item>
+          </Form.Item> */}
 
           <Form.Item
             name="Address"
             label="Address"
             rules={[{ required: true }]}
           >
-            <Input />
+            <Input disabled={true} placeholder={props.address}/>
           </Form.Item>
         </Form>
       </Modal>
