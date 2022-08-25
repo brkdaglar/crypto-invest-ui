@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import { Space, Table, Tag } from "antd";
+import Modal from 'react-modal';
+
+
+
+import Send from './SendPopup';
+import Withdraw from './WithdrawPopup';
 
 const ChildsListItem = (props) => {
   const { childsArray } = props;
+  const [getArray,setGetArray]=useState();
 
+  const getParentObj = async () => {
+    setGetArray(childsArray);
+  }
+
+  useEffect(() => {
+    getParentObj();
+  }, []);
   console.log("child:", childsArray);
 
   const columns = [
@@ -40,43 +54,22 @@ const ChildsListItem = (props) => {
     },
     {
       width: 1,
-      render: () => {
-        return <button>Withdraw</button>;
+      render: (_, record) => {
+        return <Withdraw balance={record.balance} address={record.addresses}/>
       },
     },
     {
       width: 1,
-      render: () => {
-        return <button>Send</button>;
+      render: (_, record) => {
+        return (<>
+          <Send address={record.addresses}/>
+        </>)
       },
     },
   ];
 
-  const data = [
-    {
-      key: "1",
-      name: "John Brown",
-      age: 32,
-      address: "New York No. 1 Lake Park",
-      tags: ["nice", "developer"],
-    },
-    {
-      key: "2",
-      name: "Jim Green",
-      age: 42,
-      address: "London No. 1 Lake Park",
-      tags: ["loser"],
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      age: 32,
-      address: "Sidney No. 1 Lake Park",
-      tags: ["cool", "teacher"],
-    },
-  ];
-
-  return <Table columns={columns} dataSource={childsArray || []} />;
+  return <><Table columns={columns} dataSource={childsArray || []} />
+  </>;
 };
 
 export default ChildsListItem;

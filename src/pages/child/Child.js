@@ -1,6 +1,6 @@
 import React from 'react';
 import "./Child.css"
-const ChildPage = () => {
+const Child = () => {
     return (
         <div className='ChildPage'>
             <h1 >Welcome to Crypto Legacy</h1>
@@ -15,6 +15,19 @@ const ChildPage = () => {
                 width="300" height="300"
             ></img>
             <button className="buttonwithdraw">withdraw  </button>
+
+            <div className="div">
+        <div id="divOrders" className="divButton">
+          <button id="orders"
+            onClick={() => navigate("/parent/orders")} />
+          <h4>Orders</h4>
+        </div>
+        <div id="divKids" className="divButton">
+          <button id="kids"
+            onClick={() => navigate("/kids")} />
+          <h4>Kids</h4>
+        </div>
+      </div>
         </div>
     );
 };

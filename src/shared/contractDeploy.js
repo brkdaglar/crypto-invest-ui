@@ -6,19 +6,30 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 export let contract;
 const CONTRACT_ADDRESS = "0x1B48129Fa3AA02d182f5e65811Cdc74D8ce554Bb";
 
+
+export const connectWallet = async () => {
+  console.log("Connect Wallet");
+  await window.ethereum.request({ method: "eth_requestAccounts" });
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+  contract = new ethers.Contract(CONTRACT_ADDRESS, abi, provider.getSigner());
+
+  console.log(provider.getSigner());
+  console.log(contract);
+};
+
 export const connectWalletHandler = async () => {
   let provider;
 
   if (window.ethereum) {
     // set ethers provider
     provider = new ethers.providers.Web3Provider(window.ethereum);
-    console.log(contract);
 
     // connect to metamask
     await window.ethereum
       .request({ method: "eth_requestAccounts" })
-      .then((result) => {})
-      .catch((error) => {});
+      .then((result) => { })
+      .catch((error) => { });
 
     contract = new ethers.Contract(CONTRACT_ADDRESS, abi, provider.getSigner());
     const userAddress = await provider.getSigner().getAddress();
@@ -26,6 +37,7 @@ export const connectWalletHandler = async () => {
     const roleValue = addressControl(userAddress);
 
     return roleValue;
+
   } else if (!window.ethereum) {
     console.log("Need to install MetaMask");
   }
@@ -34,7 +46,7 @@ export const connectWalletHandler = async () => {
 export const addressControl = async (_address) => {
   const tx = await contract.addressControl(_address);
   return tx;
-};
+}
 
 export const addParent = async (_firstName, _lastName) => {
   try {
@@ -47,13 +59,18 @@ export const addParent = async (_firstName, _lastName) => {
       console.log("Beklenmedik hata: ", e);
     }
   }
+
 };
 
 export const getParent = async () => {
   const parent = await contract.getParent();
-  console.log("parent, ", parent);
   return parent;
 };
+
+export const getChild = async () => {
+  const child = await contract.getChild();
+  return child;
+}
 
 export const addChild = async (
   _adres,
@@ -70,7 +87,9 @@ export const addChild = async (
     _dateOfBirth,
     _accessDate
   );
+  console.log(tx);
   console.log("added Child");
+  const parent = await contract.getParent();
 };
 
 export const getChildsFromParent = async () => {
@@ -80,10 +99,19 @@ export const getChildsFromParent = async () => {
   return childArray;
 };
 
-export const getChild = async (_adres) => {
-  console.log("getChild");
-  const child = await contract.getChild();
-  console.log(child);
-  console.log("gettedChild");
-  return child;
-};
+export const storeETH = async (address,amount)=>{
+  console.log(address," ",amount);
+  const store=await contract.storeETH(address,{value:amount});
+  console.log(store);
+}
+
+export const parentWithdraw = async (address,amount)=>{
+  console.log(address," ",amount);
+  const withdraw=await contract.parentWithdraw(address,amount);
+  console.log(withdraw);
+}
+
+export const childWithdraw = async (date)=>{
+  const withdraw=await contract.childWithdraw(date);
+  console.log(withdraw);
+}

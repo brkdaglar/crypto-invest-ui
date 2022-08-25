@@ -1,4 +1,3 @@
-import ChildList from "./pages/ChildList.js";
 import {
   HashRouter as Router,
   Route,
@@ -6,8 +5,9 @@ import {
   Routes,
 } from "react-router-dom";
 import HomePage from "./pages/Home/Home";
-import Parent from "./pages/Parent/parent";
-import ChildPage from "./pages/Child/ChildPage.js";
+import Parent from "./pages/Parent/Parent";
+import ChildPage from "./pages/child/ChildPage";
+import ChildList from "./pages/ChildList";
 
 function App() {
   return (
@@ -19,7 +19,6 @@ function App() {
             <Route exact path="/" element={<HomePage />} />
             <Route exact path="/child" element={<ChildPage />} />
             <Route exact path="/parent" element={<Parent />} />
-            <Route exact path="/child" element={<ChildPage />} />
           </Routes>
         </Router>
       </div>
