@@ -14,6 +14,8 @@ export const API_Normal_Transaction = `${ENDPOINT}?module=account&action=txlist&
 `;
 const API_log = `${ENDPOINT}?module=logs&action=getLogs&address=${CONTRACT_ADDRESS}&fromBlock=12878196&toBlock=12878196&page=1&offset=1000&apikey=${API_KEY}`;
 
+export let userAddress;
+
 export const connectWalletHandler = async () => {
   let provider;
 
@@ -28,7 +30,7 @@ export const connectWalletHandler = async () => {
       .catch((error) => {});
 
     contract = new ethers.Contract(CONTRACT_ADDRESS, abi, provider.getSigner());
-    const userAddress = await provider.getSigner().getAddress();
+    userAddress = await provider.getSigner().getAddress();
 
     const roleValue = addressControl(userAddress);
 
