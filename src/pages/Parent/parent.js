@@ -35,7 +35,7 @@ const ParentMenu = () => {
         </div>
         <div id="divOrders" className="divButton">
           <button id="orders"
-            onClick={() => navigate("/parent/orders")} />
+            onClick={() => navigate("/parent/orders") } />
           <h4>Orders</h4>
         </div>
       </div>
