@@ -4,7 +4,15 @@ import abi from "../data/contract.json";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 export let contract;
-const CONTRACT_ADDRESS = "0x1B48129Fa3AA02d182f5e65811Cdc74D8ce554Bb";
+const ENDPOINT = "https://api-rinkeby.etherscan.io/api";
+const CONTRACT_ADDRESS = "0xdB593B5dEB34Ae8542C3BF35fDcD15DE15639ba4";
+const API_KEY = "1HFBV46X2Y78BTUCJ6UVC4BMXJI2SEYI58";
+export const con = `${ENDPOINT}?module=logs&action=getLogs&fromBlock=379224&toBlock=latest&address=${CONTRACT_ADDRESS}&topic0=0xf63780e752c6a54a94fc52715dbc5518a3b4c3c2833d301a204226548a2a8545&apikey=${API_KEY}`;
+
+const API_Balance = `${ENDPOINT}?module=account&action=balance&address=${CONTRACT_ADDRESS}&tag=latest&apikey=${API_KEY}`;
+export const API_Normal_Transaction = `${ENDPOINT}?module=account&action=txlist&address=${CONTRACT_ADDRESS}&startblock=0&endblock=99999999&sort=asc&apikey=${API_KEY};
+`;
+const API_log = `${ENDPOINT}?module=logs&action=getLogs&address=${CONTRACT_ADDRESS}&fromBlock=12878196&toBlock=12878196&page=1&offset=1000&apikey=${API_KEY}`;
 
 export const connectWalletHandler = async () => {
   let provider;
@@ -23,6 +31,11 @@ export const connectWalletHandler = async () => {
     const userAddress = await provider.getSigner().getAddress();
 
     const roleValue = addressControl(userAddress);
+
+    console.log(API_Balance);
+    console.log(API_Normal_Transaction);
+    console.log(API_log);
+    console.log(con);
 
     return roleValue;
   } else if (!window.ethereum) {

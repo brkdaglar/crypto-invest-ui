@@ -5,6 +5,25 @@
     "type": "constructor"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "_firstName",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "_lastName",
+        "type": "string"
+      }
+    ],
+    "name": "AddParent",
+    "type": "event"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
