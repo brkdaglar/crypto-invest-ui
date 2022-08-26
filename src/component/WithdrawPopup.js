@@ -26,7 +26,6 @@ const WithdrawPopup = (props) => {
   const [amount, setAmount] = useState();
 
   const getParentObj = async () => {
-    console.log("parent: ", parent);
     setParent(await getParent());
   }
 

@@ -67,28 +67,23 @@ export const getParent = async () => {
 };
 
 export const addChild = async (_adres, _firstName, _lastName, _accessDate) => {
-  console.log("addChild");
   const tx = await contract.addChild(
     _adres,
     _firstName,
     _lastName,
     _accessDate
   );
-  console.log("added Child");
+  await tx.wait();
 };
 
 export const getChildsFromParent = async () => {
-  console.log("getChildsFromParent");
   const childArray = await contract.getChildsFromParent();
   console.log(childArray);
   return childArray;
 };
 
 export const getChild = async (_adres) => {
-  console.log("getChild");
   const child = await contract.getChild();
-  console.log(child);
-  console.log("gettedChild");
   return child;
 };
 

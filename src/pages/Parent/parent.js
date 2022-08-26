@@ -17,7 +17,6 @@ const ParentMenu = () => {
 
 
   const getParentObj = async () => {
-    console.log("parent: ", parent);
     setParent(await getParent());
   }
 

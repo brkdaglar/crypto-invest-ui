@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getChild, childWithdraw } from "../../shared/contractDeploy";
+import { getChild, childWithdraw, con } from "../../shared/contractDeploy";
 import "./ChildPage.css";
 import dayjs from "dayjs";
 import ProfileComponent from "../../component/ProfileComponent";
@@ -7,35 +7,36 @@ import { Button } from "antd";
 
 const ChildPage = () => {
   const [child, setChild] = useState({});
-  const [date, setDate] = useState();
   const [active, isActive] = useState(true);
 
-  useEffect(() => {
-    const getChildInformations = async () => {
-      try {
-        const res = await getChild();
-        setChild({
-          firstName: res.firstName,
-          lastName: res.lastName,
-          balance: (res.balance || 0).toString(),
-          accessDateTimeStamp: dayjs
-            .unix(res.accessDateTimeStamp)
-            .format("DD/MM/YYYY"),
-          dateOfBirthTimeStamp: dayjs
-            .unix(res.dateOfBirthTimeStamp)
-            .format("DD/MM/YYYY"),
-        });
-        setDate(dayjs().unix());
-        let balanceString = parseInt(res.balance.toString());
-        if (date >= res.accessDateTimeStamp.toNumber() && balanceString > 0) {
-          console.log("girdi");
-          console.log(balanceString);
-          isActive(false);
-        }
-      } catch (e) {
-        console.error(e);
+  const getChildInformations = async () => {
+    try {
+      const res = await getChild();
+      setChild({
+        firstName: res.firstName,
+        lastName: res.lastName,
+        balance: (res.balance || 0).toString(),
+        accessDateTimeStamp: dayjs
+          .unix(res.accessDateTimeStamp)
+          .format("DD/MM/YYYY"),
+        dateOfBirthTimeStamp: dayjs
+          .unix(res.dateOfBirthTimeStamp)
+          .format("DD/MM/YYYY"),
+      });
+      let balanceString = parseInt(res.balance.toString());
+      console.log("deger: ", balanceString > 0)
+      console.log("deger: ", dayjs().unix() >= res.accessDateTimeStamp.toNumber())
+      if (dayjs().unix() >= res.accessDateTimeStamp.toNumber() && balanceString > 0) {
+        console.log("girdi");
+        console.log(balanceString);
+        isActive(false);
       }
-    };
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  useEffect(() => {
     getChildInformations();
   }, []);
 
@@ -52,7 +53,8 @@ const ChildPage = () => {
           <Button
             type="primary"
             onClick={async () => {
-              await childWithdraw(date);
+              await childWithdraw(dayjs().unix());
+              setTimeout(()=>{getChildInformations()},50000)
             }}
             disabled={active}
           >

@@ -49,18 +49,38 @@ const ChildList = () => {
     setIsModalVisible(false);
   };
 
-  const onFinish = (values) => {
+  const loadChild = async () => {
+    try {
+      const res = await getChildsFromParent();
+      setChildsArray(
+        res.map((x) => ({
+          ...x,
+          balance: x.balance.toString(),
+          accessDateTimeStamp: dayjs
+            .unix(x.accessDateTimeStamp)
+            .format("DD/MM/YYYY"),
+        }))
+      );
+      console.log(childsArray);
+    } catch {
+      console.log(console.error());
+    }
+  };
+
+  const onFinish = async (values) => {
     console.log("Success", values);
-    console.log(values.childFirstName);
     addChild(
       values.childAddress,
       values.childFirstName,
       values.childLastName,
       accessDateOfBirth
     );
-    getChild(values.childAddress);
     form.resetFields();
     setIsModalVisible(false);
+    setTimeout(() => {
+      loadChild();
+    }, 50000)
+
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -68,23 +88,6 @@ const ChildList = () => {
   };
 
   useEffect(() => {
-    const loadChild = async () => {
-      try {
-        const res = await getChildsFromParent();
-        setChildsArray(
-          res.map((x) => ({
-            ...x,
-            balance: x.balance.toString(),
-            accessDateTimeStamp: dayjs
-              .unix(x.accessDateTimeStamp)
-              .format("DD/MM/YYYY"),
-          }))
-        );
-        console.log(childsArray);
-      } catch {
-        console.log(console.error());
-      }
-    };
     loadChild();
   }, []);
 

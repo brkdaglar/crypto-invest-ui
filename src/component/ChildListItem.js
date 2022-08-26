@@ -7,16 +7,7 @@ import Withdraw from "./WithdrawPopup";
 
 const ChildsListItem = (props) => {
   const { childsArray } = props;
-  const [getArray, setGetArray] = useState();
 
-  const getParentObj = async () => {
-    setGetArray(childsArray);
-  };
-
-  useEffect(() => {
-    getParentObj();
-  }, []);
-  console.log("child:", childsArray);
 
   const columns = [
     {

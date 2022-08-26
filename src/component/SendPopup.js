@@ -48,7 +48,6 @@ const SendPopup = (props) => {
   };
 
   const getParentObj = async () => {
-    console.log("parent: ", parent);
     setParent(await getParent());
   }
 
@@ -74,7 +73,7 @@ const SendPopup = (props) => {
       >
         <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
           <Form.Item name="parent" label="From" rules={[{ required: true }]}>
-            <Input disabled={true} placeholder={parent != undefined ? parent.addresses : console.log("çekmedi")} />
+            <Input disabled={true} placeholder={parent != undefined ? parent.addresses : ""} />
           </Form.Item>
 
           <Form.Item name="To" label="To" rules={[{ required: true }]}>
