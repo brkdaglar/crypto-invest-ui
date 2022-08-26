@@ -1,14 +1,23 @@
+import React, { useEffect, useRef, useState } from "react";
 import "antd/dist/antd.css";
 import { SearchOutlined } from "@ant-design/icons";
-import { Button, Input, Space, Table, PageHeader, Tag } from "antd";
-import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import {
+  Button,
+  Input,
+  Space,
+  Table,
+  PageHeader,
+  Tag,
+  Skeleton,
+  Typography,
+} from "antd";
 import {
   getChildsFromParentWithAddress,
-  getAllUser,
   getAllParent,
 } from "../../shared/contractDeploy";
 /* import "./UsersSearch.css"; */
+
+const { Text, Link } = Typography;
 
 const UsersSearch = () => {
   const [searchText, setSearchText] = useState("");
@@ -150,15 +159,25 @@ const UsersSearch = () => {
       dataIndex: "firstName",
       key: "firstName",
       ...getColumnSearchProps("firstName"),
+      render: (text) => <Tag color={"orange"}>{text}</Tag>,
     },
     {
       dataIndex: "lastName",
       key: "lastName",
       ...getColumnSearchProps("lastName"),
+      render: (text) => <Text code>{text}</Text>,
     },
     {
       dataIndex: "addresses",
       key: "addresses",
+      render: (text) => (
+        <Link
+          href={`https://rinkeby.etherscan.io/address/${text}`}
+          target="_blank"
+        >
+          {text}
+        </Link>
+      ),
       ...getColumnSearchProps("addresses"),
     },
     {
@@ -204,7 +223,12 @@ const UsersSearch = () => {
             }
             console.log("Bütün cocuklar: ", allChildren);
 
-            if (!children.list) return <div>Loading...</div>;
+            if (!children.list)
+              return (
+                <div>
+                  <Skeleton active />
+                </div>
+              );
 
             return (
               <p

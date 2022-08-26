@@ -1,11 +1,14 @@
 import "antd/dist/antd.css";
 import { SearchOutlined } from "@ant-design/icons";
-import { Button, Input, Space, Table, Tag } from "antd";
+import { Button, Input, Space, Table, Tag, Row, Col, PageHeader } from "antd";
 import React, { useRef, useState, useEffect } from "react";
 import { API_Normal_Transaction } from "../../shared/contractDeploy";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import dayjs from "dayjs";
+import "./OrdersSearch.css";
 
+import { orange } from "@ant-design/colors";
 const data = [];
 
 const OrdersSearch = () => {
@@ -13,6 +16,7 @@ const OrdersSearch = () => {
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
   const [txList, setTxList] = useState([]);
+  let navigate = useNavigate();
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -107,9 +111,14 @@ const OrdersSearch = () => {
       title: "TxHash",
       dataIndex: "hash",
       key: "hash",
-      width: "20%",
+      fixed: "left",
+      width: 80,
       render: (text) => (
-        <a href={`https://rinkeby.etherscan.io/tx/${text}`} target={"_blank"}>
+        <a
+          href={`https://rinkeby.etherscan.io/tx/${text}`}
+          target={"_blank"}
+          className={"tx-a"}
+        >
           {text}
         </a>
       ),
@@ -119,57 +128,80 @@ const OrdersSearch = () => {
       title: "Method",
       dataIndex: "methodId",
       key: "methodId",
-      render: (text) => <Tag color={"magenta"}>{text}</Tag>,
+      fixed: "left",
+      width: 30,
+      render: (text) => <Tag color={"orange"}>{text}</Tag>,
+      ...getColumnSearchProps("methodId"),
+    },
+
+    {
+      title: "Relevant",
+      dataIndex: "relevantDate",
+      key: "relevantDate",
+      fixed: "left",
+      width: 30,
+      render: (text) => <Tag color={"orange"}>{text}</Tag>,
+      ...getColumnSearchProps("relevantDate"),
+      /* sorter: (a, b) => a.date - b.date,
+              sortDirections: ['descend', 'ascend'], */
     },
     {
       title: "Date",
       dataIndex: "date",
       defaultSortOrder: "descend",
       key: "date",
-      width: "10%",
+      width: 40,
+      render: (text) => <Tag color={"orange"}>{text}</Tag>,
       ...getColumnSearchProps("date"),
       /* sorter: (a, b) => a.date - b.date,
             sortDirections: ['descend', 'ascend'], */
     },
     {
-      title: "Relevant",
-      dataIndex: "relevantDate",
-      key: "relevantDate",
-      width: "10%",
-      render: (text) => <Tag color={"magenta"}>{text}</Tag>,
-      ...getColumnSearchProps("relevantDate"),
-      /* sorter: (a, b) => a.date - b.date,
-              sortDirections: ['descend', 'ascend'], */
-    },
-    {
       title: "From",
       dataIndex: "from",
       key: "from",
-      width: "20%",
+      width: 100,
+      render: (text) => (
+        <a
+          href={`https://rinkeby.etherscan.io/address/${text}`}
+          target={"_blank"}
+        >
+          {text}
+        </a>
+      ),
       ...getColumnSearchProps("from"),
     },
-    {},
     {
       title: "To",
       dataIndex: "to",
       key: "to",
-      width: "20%",
+      width: 100,
+      render: (text) => (
+        <a
+          href={`https://rinkeby.etherscan.io/address/${text}`}
+          target={"_blank"}
+        >
+          {text}
+        </a>
+      ),
       ...getColumnSearchProps("to"),
+    },
+
+    {
+      title: "Function",
+      dataIndex: "functionName",
+      key: "functionName",
+      render: (text) => <Tag color={"orange"}>{text}</Tag>,
+      width: 100,
     },
     {
       title: "Amount",
-      dataIndex: "amount",
-      key: "amount",
-      width: "12%",
+      dataIndex: "value",
+      key: "value",
+      width: 10,
+      fixed: "right",
+      render: (text) => <Tag color={"orange"}>{text}</Tag>,
       ...getColumnSearchProps("amount"),
-      sorter: (a, b) => a.amount - b.amount,
-      sortDirections: ["descend", "ascend"],
-    },
-    {
-      width: "12%",
-      title: "Fucntion",
-      dataIndex: "functionName",
-      key: "functionName",
     },
   ];
   const convertRelevantDate = (list) => {
@@ -203,11 +235,23 @@ const OrdersSearch = () => {
     }
   };
 
+  const routes = [
+    {
+      path: "admin",
+      breadcrumbName: "Admin",
+    },
+    {
+      path: "ordersearch",
+      breadcrumbName: "OrderSearch",
+    },
+  ];
+
   useEffect(() => {
     const loadTransaction = async () => {
       const res = await axios.get(API_Normal_Transaction);
       console.log(res.data.result);
       convertRelevantDate(res.data.result);
+      res.data.result = res.data.result.reverse();
       setTxList(
         res.data.result.map((x) => ({
           ...x,
@@ -217,7 +261,33 @@ const OrdersSearch = () => {
     };
     loadTransaction();
   }, []);
-  return <Table columns={columns} dataSource={txList} />;
+
+  return (
+    <div>
+      <PageHeader
+        className="site-page-header tx-header"
+        title="OrderSearch Page"
+        breadcrumb={{
+          routes,
+        }}
+        style={{ backgroundColor: "white" }}
+        onBack={() => {
+          navigate("../admin", { replace: true });
+        }}
+        subTitle="Transaction Details"
+      />
+      <col></col>
+      <Table
+        scroll={{
+          x: 3000,
+        }}
+        size={"small"}
+        columns={columns}
+        dataSource={txList}
+        className={"ant-table tx"}
+      />
+    </div>
+  );
 };
 
 export default OrdersSearch;
