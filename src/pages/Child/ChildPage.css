@@ -1,4 +1,5 @@
-.ChildPage {background-color: #16357B;
+.childpage {
+    background-color: #16357B;
     height: 100vh;
   }
 
@@ -71,3 +72,11 @@ h3 {color: white;
     background-color: #4CAF50;
     color: white;
   }
+  .childname{
+    position: absolute;
+    top: 250px;
+  }
+  .icons{
+    top: 175px;
+  }
+  

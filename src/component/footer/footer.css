@@ -1,0 +1,44 @@
+
+.FooterDiv {
+    color: #001E6C;
+  }
+  
+  .Powered {
+    color: #001E6C;
+    font-size: 15px;
+  }
+  
+  .facebooklogo {
+    height: 35px;
+    width: 35px;
+    background-image: url(./Facebook.png);
+    background-size: cover;
+  }
+  
+  .instagramlogo {
+    height: 35px;
+    width: 35px;
+    background-image: url(./Facebook.png);
+    background-size: cover;
+  }
+  
+  .twitterlogo {
+    height: 35px;
+    width: 35px;
+    background-image: url(./Facebook.png);
+    background-size: cover;
+  }
+  
+  .youtubelogo {
+    height: 35px;
+    width: 35px;
+    background-image: url(./Facebook.png);
+    background-size: cover;
+  }
+  
+  .linkedinlogo {
+    height: 35px;
+    width: 35px;
+    background-image: url(./Facebook.png);
+    background-size: cover;
+  }

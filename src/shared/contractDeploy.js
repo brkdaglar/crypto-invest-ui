@@ -4,7 +4,7 @@ import abi from "../data/contract.json";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 export let contract;
-const CONTRACT_ADDRESS = "0x1B48129Fa3AA02d182f5e65811Cdc74D8ce554Bb";
+const CONTRACT_ADDRESS = "0xdB593B5dEB34Ae8542C3BF35fDcD15DE15639ba4";
 
 export const connectWalletHandler = async () => {
   let provider;

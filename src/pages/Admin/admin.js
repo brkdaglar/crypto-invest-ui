@@ -1,15 +1,15 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import "./Parent.css";
+import "./admin.css";
 import line from "./line.png";
-import kids from "./kids.png";
-
+import hash from "./hash.png";
 import { getParent } from "../../shared/contractDeploy";
-
-
-import { useNavigate, useLocation } from "react-router-dom";
-import Foot from '../../component/footer/footer';
+import logo from "../Home/logo-last.png";
 import { Button, Modal, Layout, Menu, Row, Col, Divider } from "antd";
+import { useNavigate, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import Foot from '../../component/footer/footer';
+
 const { Header, Content, Footer } = Layout;
 
 const ParentMenu = () => {
@@ -28,7 +28,8 @@ const ParentMenu = () => {
   }, []);
 
   return (
-    <Layout>
+    <div>
+      <Layout>
         <Header className="header"
           style={{
             position: 'fixed',
@@ -39,7 +40,7 @@ const ParentMenu = () => {
           <div className="logo" />
           <Row>
             <Col span={1}>
-              <img src={require('../Home/logo-last.png')}  className="logo-last" />
+              <img src={logo} className="logo-last" />
             </Col>
             <Col span={8}>
             <a className="legacy" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LEGACY CRYPTO</a>
@@ -64,23 +65,23 @@ const ParentMenu = () => {
         ><div className="root">
         <div className="divProfile">
           
-          <h4>{parent != undefined ? parent.firstName : "gelmedi"} {parent != undefined ? parent.lastName : "gelmedi"}</h4>
+          <h4 className="admintext">Admin</h4>
           <img src={line} className="line"/>
         </div>
         <div className="div">
-          <div id="divOrders" >
-            <button id="orders" className="icons"
-              onClick={() => navigate("/parent/orders")} />
-            <h4>Orders</h4>
-          </div>
-            
-          <div id="divKids" className="divButton" >
-            <button id="kids"
-              onClick={() => navigate("/kids")} />
-            <h4>Kids</h4>
+          <div id="divhash" className="hashbutton">
+            <button id="hash"
+              onClick={() => navigate("/hash")} />
+            <h4 className="hashtext">Hash</h4>
+          </div>  
+          <div id="diusers" className="usersbutton">
+            <button id="users"
+              onClick={() => navigate("/users")} />
+            <h4 className="userstext">Users</h4>
           </div>
         </div>
         
+  
       </div>
         </Content>
 
@@ -88,8 +89,34 @@ const ParentMenu = () => {
 
         <Foot />
       </Layout>
-    
+
+
+
+
+    </div>
   );
 };
 
 export default ParentMenu;
+
+/*<div className="root">
+      <div className="divProfile">
+        <img src={require("./image.png")} width="150px" height="150px" />
+        <h4>{parent != undefined ? parent.firstName : "gelmedi"} {parent != undefined ? parent.lastName : "gelmedi"}</h4>
+        <div style={{ height: "7px", backgroundColor: "white", borderRadius: 5 }} />
+      </div>
+      <div className="div">
+        <div id="divhash" className="divButton">
+          <button id="hash"
+            onClick={() => navigate("/hash")} />
+          <h4>Hash</h4>
+        </div>  
+        <div id="diusers" className="divButton">
+          <button id="users"
+            onClick={() => navigate("/users")} />
+          <h4 className="userstext">Users</h4>
+        </div>
+      </div>
+      
+
+    </div>*/

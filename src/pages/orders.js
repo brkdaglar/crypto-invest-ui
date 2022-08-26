@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import "./ChildList.css";
+import "./orders.css";
 import {
   getParent,
   getChildsFromParent,
@@ -9,8 +9,6 @@ import {
 import { Button, Modal, Form, Input, Select, DatePicker,Layout,Row,Col } from "antd";
 import "antd/dist/antd.css";
 import logo from "../pages/Home/logo-last.png"
-import { isDisabled } from "@testing-library/user-event/dist/utils";
-import ChildsListItem from "../component/ChildListItem";
 import dayjs from "dayjs";
 import Foot from '../component/footer/footer';
 
@@ -31,7 +29,7 @@ const tailLayout = {
   },
 };
 
-const ChildList = () => {
+const Orders = () => {
   const [childsArray, setChildsArray] = useState();
 
   const [dateOfBirth, setDateOfBirth] = useState();
@@ -144,91 +142,14 @@ const ChildList = () => {
         </Header>
 
         <Content className="home" style={{width: '100%'}}>
-        <div id="mainpage">
-      <h1>
-        {" "}
-        <ins> CHİLDREN </ins>{" "}
-      </h1>
-
-      <table id="children">
-        <div>
-          <ChildsListItem childsArray={childsArray} />
-        </div>
-      </table>
-      <div className="">
-        <Button
-          type="primary"
-          style={{ textAlign: "center" }}
-          onClick={showModal}
-        >
-          +
-        </Button>
-
-        <Modal
-          title="Add Children"
-          visible={isModalVisible}
-          footer={null}
-          onCancel={handleOk}
-        >
-          <Form
-            {...layout}
-            form={form}
-            name="control-hooks"
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            className="form"
-          >
-            <Form.Item
-              name="childFirstName"
-              label="Name"
-              rules={[{ required: true, message: "Please input your name!" }]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              name="childLastName"
-              label="Surname"
-              rules={[
-                { required: true, message: "Please input your surname!" },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              name="childAddress"
-              label="Address"
-              rules={[
-                { required: true, message: "Please input your address!" },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              name="dateOfBirth"
-              label="Date Of Birth"
-              rules={[
-                { required: true, message: "Please input your date of birth!" },
-              ]}
-            >
-              <DatePicker onChange={onChangeDate} />
-            </Form.Item>
-            <Form.Item>
-              <Button type="primary" htmlType="submit">
-                Submit
-              </Button>
-            </Form.Item>
-          </Form>
-        </Modal>
-      </div>
-    </div>
+        
         </Content>
 
 
 
         <Foot />
+      
+      
       </Layout>
 
 
@@ -238,4 +159,4 @@ const ChildList = () => {
   );
 };
 
-export default ChildList;
+export default Orders;
