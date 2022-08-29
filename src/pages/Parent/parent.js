@@ -6,8 +6,10 @@ import kids from "./kids.png";
 
 import { getParent } from "../../shared/contractDeploy";
 
-
 import { useNavigate, useLocation } from "react-router-dom";
+import Foot from "../../component/footer/footer";
+import { Button, Modal, Layout, Menu, Row, Col, Divider } from "antd";
+const { Header, Content, Footer } = Layout;
 import ProfileComponent from "../../component/ProfileComponent";
 
 const ParentMenu = () => {
@@ -15,43 +17,80 @@ const ParentMenu = () => {
   const location = useLocation();
   const [parent, setParent] = useState();
 
-
   const getParentObj = async () => {
     setParent(await getParent());
-  }
+  };
 
   useEffect(() => {
     getParentObj();
   }, []);
 
   return (
-    <div className="root">
-      <ProfileComponent />
-      <div className="divParent">
-        <div id="divKids" className="divButton">
-          <button id="kids"
-            onClick={() => navigate("/kids")} />
-          <h4>Kids</h4>
-        </div>
-        <div id="divOrders" className="divButton">
-          <button id="orders"
-            onClick={() => navigate("/parent/orders") } />
-          <h4>Orders</h4>
-        </div>
-      </div>
-      {/* {console.log("Gelen parent:", parent)}
-      <h1 className="h1-parent">Welcome to Crypto Legacy</h1>
-      <text>{parent != undefined ? parent.firstName:"gelmedi"}</text>
-      <text>{parent != undefined ? parent.lastName:"gelmedi"}</text>
-      <i class="fa-brands fa-ethereum"></i>
-      
-      <button className="button button1" onClick={() => navigate("/kids")}></button>
-      <img src={image} className="ethlogo"></img>
-      <img src={line} className="line"></img>
-      <h2>Kids</h2>
-      <h3>Orders</h3> */}
+    <Layout>
+      <Header
+        className="header"
+        style={{
+          position: "fixed",
+          zIndex: 1,
+          width: "100%",
+        }}
+      >
+        <div className="logo" />
+        <Row>
+          <Col span={1}>
+            <img src={require("../Home/logo-last.png")} className="logo-last" />
+          </Col>
+          <Col span={8}>
+            <a className="legacy" href="#">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LEGACY CRYPTO
+            </a>
+          </Col>
+          <Col span={6}></Col>
+          <Col span={6}>
+            <button className="homebutton">
+              <a className="legacy" href="#">
+                Home Page
+              </a>
+            </button>
+          </Col>
+        </Row>
+      </Header>
 
-    </div>
+      <Content
+        className="home"
+        style={{
+          width: "100%",
+        }}
+      >
+        <div className="root">
+          <div className="divProfile">
+            <ProfileComponent />
+            <h4>
+              {parent != undefined ? parent.firstName : "gelmedi"}{" "}
+              {parent != undefined ? parent.lastName : "gelmedi"}
+            </h4>
+            <img src={line} className="line" />
+          </div>
+          <div className="div">
+            <div id="divOrders">
+              <button
+                id="orders"
+                className="icons"
+                onClick={() => navigate("/parent/orders")}
+              />
+              <h4>Orders</h4>
+            </div>
+
+            <div id="divKids" className="divButton">
+              <button id="kids" onClick={() => navigate("/kids")} />
+              <h4>Kids</h4>
+            </div>
+          </div>
+        </div>
+      </Content>
+
+      <Foot />
+    </Layout>
   );
 };
 

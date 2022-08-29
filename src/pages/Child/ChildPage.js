@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { getChild, childWithdraw, con } from "../../shared/contractDeploy";
 import "./ChildPage.css";
+import line from "./line.png";
 import dayjs from "dayjs";
-import ProfileComponent from "../../component/ProfileComponent";
-import { Button } from "antd";
+import wallet from "./wallet.JPG";
+import calender from "./calender.PNG";
+import Foot from "../../component/footer/footer";
+import { Button, Modal, Layout, Menu, Row, Col, Divider } from "antd";
+const { Header, Content, Footer } = Layout;
 
 const ChildPage = () => {
   const [child, setChild] = useState({});
@@ -24,9 +28,15 @@ const ChildPage = () => {
           .format("DD/MM/YYYY"),
       });
       let balanceString = parseInt(res.balance.toString());
-      console.log("deger: ", balanceString > 0)
-      console.log("deger: ", dayjs().unix() >= res.accessDateTimeStamp.toNumber())
-      if (dayjs().unix() >= res.accessDateTimeStamp.toNumber() && balanceString > 0) {
+      console.log("deger: ", balanceString > 0);
+      console.log(
+        "deger: ",
+        dayjs().unix() >= res.accessDateTimeStamp.toNumber()
+      );
+      if (
+        dayjs().unix() >= res.accessDateTimeStamp.toNumber() &&
+        balanceString > 0
+      ) {
         console.log("girdi");
         console.log(balanceString);
         isActive(false);
@@ -41,31 +51,77 @@ const ChildPage = () => {
   }, []);
 
   return (
-    <div className="root">
-      <ProfileComponent />
-      <div className="divChild">
-        <div id="divBalance">
-          <div id="balance" />
-          <h4>{child.balance}</h4>
-        </div>
-        <div id="divButton">
-          {console.log(active)}
-          <Button
-            type="primary"
-            onClick={async () => {
-              await childWithdraw(dayjs().unix());
-              setTimeout(()=>{getChildInformations()},50000)
-            }}
-            disabled={active}
-          >
-            Withdraw
-          </Button>
-        </div>
-        <div id="divDate">
-          <div id="date" />
-          <h4>{child.accessDateTimeStamp}</h4>
-        </div>
-      </div>
+    <div>
+      <Layout>
+        <Header
+          className="header"
+          style={{
+            position: "fixed",
+            zIndex: 1,
+            width: "100%",
+          }}
+        >
+          <div className="logo" />
+          <Row>
+            <Col span={1}>
+              <img
+                src={require("../Home/logo-last.png")}
+                className="logo-last"
+              />
+            </Col>
+            <Col span={8}>
+              <a className="legacy" href="#">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LEGACY CRYPTO
+              </a>
+            </Col>
+            <Col span={6}></Col>
+            <Col span={6}>
+              <button className="homebutton">
+                <a className="legacy" href="#">
+                  Home Page
+                </a>
+              </button>
+            </Col>
+          </Row>
+        </Header>
+
+        <Content
+          className="home"
+          style={{
+            width: "100%",
+          }}
+        >
+          <div className="ChildPage">
+            <div className="divProfile">
+              <h3 className="childname">
+                {console.log("Gelen child:", child)}
+                {child.firstName} {child.lastName}
+              </h3>
+              <img src={line} className="line" />
+            </div>
+
+            <p id="firstparagraph">{child.balance}</p>
+            <p id="secondparagraph">{child.accessDateTimeStamp}</p>
+            <img
+              className="icons"
+              id="bigetherimage"
+              src={wallet}
+              width="300"
+              height="300"
+            ></img>
+            <img
+              className="icons"
+              id="dateimage"
+              src={calender}
+              width="300"
+              height="300"
+            ></img>
+            <button className="buttonwithdraw">withdraw </button>
+          </div>
+        </Content>
+
+        <Foot />
+      </Layout>
     </div>
   );
 };

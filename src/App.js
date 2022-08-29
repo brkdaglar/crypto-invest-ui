@@ -11,7 +11,8 @@ import ChildList from "./pages/Parent/ChildList/ChildList.js";
 import UsersSearch from "./pages/Admin/UsersSearch";
 import OrdersSearch from "./pages/Admin/OrdersSearch";
 import OrdersHistory from "./pages/OrdersHistory";
-import AdminPage from "./pages/Admin/AdminPage";
+import About from "./pages/About/about";
+import Admin from "./pages/Admin/admin";
 
 function App() {
   return (
@@ -24,7 +25,8 @@ function App() {
             <Route path="/kids" element={<ChildList />} />
             <Route path="/parent/orders" element={<OrdersHistory />} />
             <Route exact path="/child" element={<ChildPage />} />
-            <Route exact path="/admin" element={<AdminPage />} />
+            <Route exact path="/about" element={<About />} />
+            <Route exact path="/admin" element={<Admin />} />
             <Route exact path="/admin/userList" element={<UsersSearch />} />
             <Route exact path="/admin/ordersearch" element={<OrdersSearch />} />
           </Routes>
