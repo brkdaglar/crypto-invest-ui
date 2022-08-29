@@ -1,6 +1,16 @@
 import "antd/dist/antd.css";
 import { SearchOutlined } from "@ant-design/icons";
-import { Button, Input, Space, Table, Tag, Row, Col, PageHeader } from "antd";
+import {
+  Button,
+  Input,
+  Space,
+  Table,
+  Tag,
+  Row,
+  Col,
+  PageHeader,
+  Layout,
+} from "antd";
 import React, { useRef, useState, useEffect } from "react";
 import { API_Normal_Transaction } from "../../shared/contractDeploy";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +18,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import "./OrdersSearch.css";
 
-import { orange } from "@ant-design/colors";
+const { Content } = Layout;
 const data = [];
 
 const OrdersSearch = () => {
@@ -263,29 +273,37 @@ const OrdersSearch = () => {
   }, []);
 
   return (
-    <div>
-      <PageHeader
-        className="site-page-header tx-header"
-        title="OrderSearch Page"
-        breadcrumb={{
-          routes,
+    <Layout>
+      <Content
+        style={{
+          background: "#17357A",
+          minHeight: "800px",
+          marginTop: "60px",
         }}
-        style={{ backgroundColor: "white" }}
-        onBack={() => {
-          navigate("../admin", { replace: true });
-        }}
-        subTitle="Transaction Details"
-      />
-      <Table
-        scroll={{
-          x: 3000,
-        }}
-        size={"small"}
-        columns={columns}
-        dataSource={txList}
-        className={"ant-table tx"}
-      />
-    </div>
+      >
+        <PageHeader
+          className="site-page-header tx-header"
+          title="OrderSearch Page"
+          breadcrumb={{
+            routes,
+          }}
+          style={{ backgroundColor: "#5089C6" }}
+          onBack={() => {
+            navigate("../admin", { replace: true });
+          }}
+          subTitle="Transaction Details"
+        />
+        <Table
+          scroll={{
+            x: 3000,
+          }}
+          size={"small"}
+          columns={columns}
+          dataSource={txList}
+          className={"ant-table tx"}
+        />
+      </Content>
+    </Layout>
   );
 };
 

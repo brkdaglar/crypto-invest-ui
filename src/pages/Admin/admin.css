@@ -24,7 +24,7 @@ body {
     border: none;
     position: absolute;
     left: 500px;
-    border-radius: 50cm;
+    border-radius: 250cm;
     position: absolute;
     top: 320px;
   }
@@ -86,7 +86,7 @@ body {
 
   .hashtext {
     position: absolute;
-    left: 1030px;
+    left: 1020px;
     top: 470px;
   }
 

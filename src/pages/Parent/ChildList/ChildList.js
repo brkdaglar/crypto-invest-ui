@@ -122,7 +122,7 @@ const ChildList = () => {
         style={{
           marginTop: "20px",
           backgroundColor: "#17357A",
-          minHeight: "800px",
+          minHeight: "1000px",
         }}
       >
         <div id="mainpage">
@@ -136,7 +136,7 @@ const ChildList = () => {
             breadcrumb={{
               routes,
             }}
-            style={{ backgroundColor: "white" }}
+            style={{ backgroundColor: "#5089C6" }}
             onBack={() => {
               navigate("../parent", { replace: true });
             }}

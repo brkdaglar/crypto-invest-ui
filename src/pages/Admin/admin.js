@@ -5,10 +5,8 @@ import line from "./line.png";
 import hash from "./hash.png";
 import { getParent } from "../../shared/contractDeploy";
 import logo from "../Home/logo-last.png";
-import { Button, Modal, Layout, Menu, Row, Col, Divider } from "antd";
+import { Button, Modal, Layout, Menu, Row, Col, Divider, Card } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Routes, Route } from "react-router-dom";
-import Foot from '../../component/footer/footer';
 
 const { Header, Content, Footer } = Layout;
 
@@ -17,11 +15,10 @@ const ParentMenu = () => {
   const location = useLocation();
   const [parent, setParent] = useState();
 
-
   const getParentObj = async () => {
     console.log("parent: ", parent);
     setParent(await getParent());
-  }
+  };
 
   useEffect(() => {
     getParentObj();
@@ -30,69 +27,61 @@ const ParentMenu = () => {
   return (
     <div>
       <Layout>
-        <Header className="header"
-          style={{
-            position: 'fixed',
-            zIndex: 1,
-            width: '100%',
-          }}
-        >
-          <div className="logo" />
-          <Row>
-            <Col span={1}>
-              <img src={logo} className="logo-last" />
-            </Col>
-            <Col span={8}>
-            <a className="legacy" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LEGACY CRYPTO</a>
-            </Col>
-            <Col span={6}>
-            </Col>
-            <Col span={6} >
-              <button className="homebutton">
-                <a className="legacy" href="#">Home Page</a>
-              </button>
-            </Col>
-          </Row>
-
-        </Header>
-
         <Content
           className="home"
           style={{
-
-            width: '100%'
+            width: "100%",
+            background: "#17357A",
           }}
-        ><div className="root">
-        <div className="divProfile">
-          
-          <h4 className="admintext">Admin</h4>
-          <img src={line} className="line"/>
-        </div>
-        <div className="div">
-          <div id="divhash" className="hashbutton">
-            <button id="hash"
-              onClick={() => navigate("/hash")} />
-            <h4 className="hashtext">Hash</h4>
-          </div>  
-          <div id="diusers" className="usersbutton">
-            <button id="users"
-              onClick={() => navigate("/users")} />
-            <h4 className="userstext">Users</h4>
+        >
+          <div className="root">
+            <Card
+              title="Admin"
+              bordered={false}
+              style={{
+                width: 300,
+                background: "#5089C6",
+                marginTop: "80px",
+              }}
+            >
+              <p>Card content</p>
+              <p>Card content</p>
+              <p>Card content</p>
+            </Card>
+            <div className="div">
+              <div id="divhash" className="hashbutton">
+                <img
+                  id="hash"
+                  onClick={() => navigate("../admin/ordersearch")}
+                />
+                <Button
+                  className="hashtext"
+                  type="primary"
+                  style={{
+                    background: "#F89C35",
+                    borderColor: "#F89C35",
+                    marginRight: "20px",
+                  }}
+                  onClick={() => navigate("../admin/ordersearch")}
+                >
+                  Transaction
+                </Button>
+              </div>
+              <div id="diusers" className="usersbutton">
+                <img id="users" onClick={() => navigate("../admin/userlist")} />
+                <Button
+                  className="userstext"
+                  type="primary"
+                  style={{ background: "#F89C35", borderColor: "#F89C35" }}
+                  onClick={() => navigate("../admin/userlist")}
+                >
+                  Users
+                </Button>
+              </div>
+            </div>
           </div>
-        </div>
-        
-  
-      </div>
         </Content>
-
-
-
-        <Foot />
       </Layout>
-
-
-
-
     </div>
   );
 };

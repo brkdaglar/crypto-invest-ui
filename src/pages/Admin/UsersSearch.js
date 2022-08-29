@@ -10,6 +10,7 @@ import {
   Tag,
   Skeleton,
   Typography,
+  Layout,
 } from "antd";
 import {
   getChildsFromParentWithAddress,
@@ -20,6 +21,7 @@ import users from "./users.png";
 import { useNavigate } from "react-router-dom";
 
 const { Text, Link } = Typography;
+const { Content } = Layout;
 
 const UsersSearch = () => {
   const [searchText, setSearchText] = useState("");
@@ -213,80 +215,88 @@ const UsersSearch = () => {
   ];
 
   return (
-    <div>
-      <PageHeader
-        className="site-page-header tx-header"
-        title="UserList Page"
-        breadcrumb={{
-          routes,
+    <Layout>
+      <Content
+        style={{
+          background: "#17357A",
+          marginTop: "64px",
+          minHeight: "1000px",
         }}
-        style={{ backgroundColor: "#5089C6" }}
-        onBack={() => {
-          navigate("../admin", { replace: true });
-        }}
-        subTitle="Users Details"
-      />
-      <div className="ok">
-        <img src={users} style={{ width: 500, textAlign: "center" }}></img>
+      >
+        <PageHeader
+          className="site-page-header tx-header"
+          title="UserList Page"
+          breadcrumb={{
+            routes,
+          }}
+          style={{ backgroundColor: "#5089C6" }}
+          onBack={() => {
+            navigate("../admin", { replace: true });
+          }}
+          subTitle="Users Details"
+        />
+        <div className="ok">
+          <img src={users} style={{ width: 300, textAlign: "center" }}></img>
 
-        <h1>USERS</h1>
-      </div>
-      <Table
-        rowClassName={(record, index) =>
-          index % 2 === 0 ? "table-row-light" : "table-row-dark"
-        }
-        className="user"
-        rowKey="addresses"
-        columns={columns}
-        expandable={{
-          expandedRowRender: (a, record) => {
-            let children = allChildren[a.addresses] || {};
-            console.log("Satır durumu: ", children);
-            if (!children.list && !children.pending) {
-              setAllChildren((prev) => {
-                return { ...prev, [a.addresses]: { pending: true } };
-              });
-
-              getChildsFromParentWithAddress(a.addresses).then((res) => {
-                console.log("GetChildren: ", res);
+          <h1>USERS</h1>
+        </div>
+        <Table
+          rowClassName={(record, index) =>
+            index % 2 === 0 ? "table-row-light" : "table-row-dark"
+          }
+          className="user"
+          rowKey="addresses"
+          columns={columns}
+          expandable={{
+            expandedRowRender: (a, record) => {
+              let children = allChildren[a.addresses] || {};
+              console.log("Satır durumu: ", children);
+              if (!children.list && !children.pending) {
                 setAllChildren((prev) => {
-                  return {
-                    ...prev,
-                    [a.addresses]: { list: res, pending: false },
-                  };
+                  return { ...prev, [a.addresses]: { pending: true } };
                 });
-              });
-            }
-            console.log("Bütün cocuklar: ", allChildren);
 
-            if (!children.list)
+                getChildsFromParentWithAddress(a.addresses).then((res) => {
+                  console.log("GetChildren: ", res);
+                  setAllChildren((prev) => {
+                    return {
+                      ...prev,
+                      [a.addresses]: { list: res, pending: false },
+                    };
+                  });
+                });
+              }
+              console.log("Bütün cocuklar: ", allChildren);
+
+              if (!children.list)
+                return (
+                  <div>
+                    <Skeleton active />
+                  </div>
+                );
+
               return (
-                <div>
-                  <Skeleton active />
-                </div>
+                <p
+                  style={{
+                    margin: 0,
+                  }}
+                >
+                  {console.log("Satır", { record, a })}
+                  {
+                    <Table
+                      columns={childColumns}
+                      dataSource={children.list || []}
+                    />
+                  }
+                </p>
               );
-
-            return (
-              <p
-                style={{
-                  margin: 0,
-                }}
-              >
-                {console.log("Satır", { record, a })}
-                {
-                  <Table
-                    columns={childColumns}
-                    dataSource={children.list || []}
-                  />
-                }
-              </p>
-            );
-          },
-          rowExpandable: (record) => record.firstName !== "Not Expandable",
-        }}
-        dataSource={allUsers || []}
-      />
-    </div>
+            },
+            rowExpandable: (record) => record.firstName !== "Not Expandable",
+          }}
+          dataSource={allUsers || []}
+        />
+      </Content>
+    </Layout>
   );
 };
 

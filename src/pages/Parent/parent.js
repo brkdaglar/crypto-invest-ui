@@ -32,6 +32,7 @@ const ParentMenu = () => {
         style={{
           width: "100%",
           marginTop: "60px",
+          background: "#17357A",
         }}
       >
         <div className="root">
