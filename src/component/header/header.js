@@ -1,7 +1,7 @@
 import React from "react";
 import "../../pages/Home/Home.css";
-import { Button, Modal, Layout, Menu, Row, Col, Divider } from "antd";
-const { Header, Content, Footer } = Layout;
+import { Layout, Row, Col, Button } from "antd";
+const { Header } = Layout;
 
 const HeaderLayout = () => {
   return (

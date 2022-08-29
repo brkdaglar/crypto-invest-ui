@@ -40,6 +40,7 @@ export const connectWalletHandler = async () => {
     console.log(API_log);
     console.log(con);
 
+    console.log(roleValue);
     return roleValue;
   } else if (!window.ethereum) {
     console.log("Need to install MetaMask");

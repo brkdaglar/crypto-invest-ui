@@ -12,6 +12,7 @@ import {
   DatePicker,
   PageHeader,
   Layout,
+  Alert,
 } from "antd";
 import "antd/dist/antd.css";
 import ChildsListItem from "../../../component/ChildListItem";
@@ -43,6 +44,7 @@ const ChildList = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
   let navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -78,15 +80,20 @@ const ChildList = () => {
 
   const onFinish = async (values) => {
     console.log("Success", values);
-    await addChild(
-      values.childAddress,
-      values.childFirstName,
-      values.childLastName,
-      accessDateOfBirth
-    );
-    form.resetFields();
-    setIsModalVisible(false);
-    loadChild();
+    try {
+      await addChild(
+        values.childAddress,
+        values.childFirstName,
+        values.childLastName,
+        accessDateOfBirth
+      );
+      form.resetFields();
+      setIsModalVisible(false);
+      loadChild();
+    } catch (e) {
+      console.log(e);
+      setError(e);
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -148,6 +155,20 @@ const ChildList = () => {
               childsArray={childsArray}
             />
           </div>
+          {error && (
+            <Alert
+              style={{ margin: "20px 80px 10px 80px" }}
+              message="Error"
+              description=" 
+              Address already registered"
+              type="error"
+              showIcon
+              closable
+              afterClose={() => {
+                setError("");
+              }}
+            />
+          )}
 
           <div className="button-margin">
             <Button

@@ -15,6 +15,7 @@ import About from "./pages/About/about";
 import AdminMenu from "./pages/Admin/admin.js";
 import HeaderLayout from "./component/header/header";
 import FooterLayout from "./component/footer/footer.js";
+import { roleValue } from "./shared/contractDeploy";
 
 function App() {
   return (

@@ -3,12 +3,13 @@ import { getChild, childWithdraw } from "../../shared/contractDeploy";
 import "./Child.css";
 import dayjs from "dayjs";
 import ProfileComponent from "../../component/ProfileComponent";
-import { Button, Layout } from "antd";
+import { Button, Layout, Progress } from "antd";
 const { Content } = Layout;
 
 const ChildPage = () => {
   const [child, setChild] = useState({});
   const [active, isActive] = useState(true);
+  const [dayDif, setDayDif] = useState();
 
   const getChildInformations = async () => {
     try {
@@ -23,9 +24,12 @@ const ChildPage = () => {
         dateOfBirthTimeStamp: dayjs
           .unix(res.dateOfBirthTimeStamp)
           .format("DD/MM/YYYY"),
+        timeDif: (res.accessDateTimeStamp - dayjs().unix()) / 60 / 60 / 24,
       });
       let balanceString = parseInt(res.balance.toString());
       console.log("deger: ", balanceString > 0);
+      console.log(child.timeDif);
+
       console.log(
         "deger: ",
         dayjs().unix() >= res.accessDateTimeStamp.toNumber()
@@ -52,19 +56,6 @@ const ChildPage = () => {
       <Content
         style={{ background: "#16357B", minHeight: "660px", marginTop: "60px" }}
       >
-        {/* <ProfileComponent />
-        <div className="root">
-          <div className="divParent">
-            <div id="divKids" className="divButton">
-              <button id="kids" />
-              <h4>Kids</h4>
-            </div>
-            <div id="divOrders" className="divButton">
-              <button id="orders" />
-              <h4>Orders</h4>
-            </div>
-          </div>
-        </div> */}
         <ProfileComponent />
         <div className="divChild">
           <div id="divBalance">
@@ -73,6 +64,12 @@ const ChildPage = () => {
           </div>
           <div id="divButton">
             {console.log(active)}
+            {/*     <Progress
+              type="circle"
+              percent={1}
+              format={(percent) => `${percent} Days`}
+            />
+            <Progress type="circle" percent={100} format={() => "Done"} /> */}
             <Button
               type="primary"
               onClick={async () => {

@@ -4,7 +4,6 @@ import "./admin.css";
 import { API_Balance, roleValue } from "../../shared/contractDeploy";
 import { Button, Layout, Card, Statistic } from "antd";
 import { useNavigate } from "react-router-dom";
-import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
 import axios from "axios";
 
 const { Content } = Layout;
@@ -40,9 +39,12 @@ const AdminMenu = () => {
               title="Admin Panel"
               bordered={false}
               style={{
-                width: 300,
-                background: "#5089C6",
-                marginTop: "80px",
+                width: 400,
+                height: 200,
+                background: "#FFAA4C", // #5089C6
+                marginTop: "100px",
+                marginLeft: "40px",
+                overflowY: "hidden",
               }}
             >
               <Statistic
@@ -52,7 +54,6 @@ const AdminMenu = () => {
                 valueStyle={{
                   color: "#3f8600",
                 }}
-                prefix={<ArrowUpOutlined />}
                 suffix={"wei"}
               />
             </Card>
