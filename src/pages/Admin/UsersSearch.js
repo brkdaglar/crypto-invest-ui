@@ -15,7 +15,9 @@ import {
   getChildsFromParentWithAddress,
   getAllParent,
 } from "../../shared/contractDeploy";
-/* import "./UsersSearch.css"; */
+import "./UsersSearch.css";
+import users from "./users.png";
+import { useNavigate } from "react-router-dom";
 
 const { Text, Link } = Typography;
 
@@ -25,6 +27,7 @@ const UsersSearch = () => {
   const searchInput = useRef(null);
   const [allUsers, setAllUsers] = useState([]);
   const [allChildren, setAllChildren] = useState({});
+  let navigate = useNavigate();
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -143,6 +146,14 @@ const UsersSearch = () => {
       title: "Address",
       dataIndex: "addresses",
       key: "addresses",
+      render: (text) => (
+        <Link
+          href={`https://rinkeby.etherscan.io/address/${text}`}
+          target="_blank"
+        >
+          {text}
+        </Link>
+      ),
       ...getColumnSearchProps("addresses"),
     },
     {
@@ -159,13 +170,11 @@ const UsersSearch = () => {
       dataIndex: "firstName",
       key: "firstName",
       ...getColumnSearchProps("firstName"),
-      render: (text) => <Tag color={"orange"}>{text}</Tag>,
     },
     {
       dataIndex: "lastName",
       key: "lastName",
       ...getColumnSearchProps("lastName"),
-      render: (text) => <Text code>{text}</Text>,
     },
     {
       dataIndex: "addresses",
@@ -192,14 +201,41 @@ const UsersSearch = () => {
     },
   ];
 
+  const routes = [
+    {
+      path: "admin",
+      breadcrumbName: "Admin",
+    },
+    {
+      path: "userlist",
+      breadcrumbName: "UserList",
+    },
+  ];
+
   return (
     <div>
+      <PageHeader
+        className="site-page-header tx-header"
+        title="UserList Page"
+        breadcrumb={{
+          routes,
+        }}
+        style={{ backgroundColor: "#5089C6" }}
+        onBack={() => {
+          navigate("../admin", { replace: true });
+        }}
+        subTitle="Users Details"
+      />
       <div className="ok">
-        <img src="https://icons.iconarchive.com/icons/cjdowner/cryptocurrency-flat/256/Ethereum-ETH-icon.png"></img>
+        <img src={users} style={{ width: 500, textAlign: "center" }}></img>
 
         <h1>USERS</h1>
       </div>
       <Table
+        rowClassName={(record, index) =>
+          index % 2 === 0 ? "table-row-light" : "table-row-dark"
+        }
+        className="user"
         rowKey="addresses"
         columns={columns}
         expandable={{

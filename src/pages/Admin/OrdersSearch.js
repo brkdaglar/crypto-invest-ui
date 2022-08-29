@@ -276,7 +276,6 @@ const OrdersSearch = () => {
         }}
         subTitle="Transaction Details"
       />
-      <col></col>
       <Table
         scroll={{
           x: 3000,

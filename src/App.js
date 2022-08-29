@@ -5,12 +5,13 @@ import {
   Routes,
 } from "react-router-dom";
 import HomePage from "./pages/Home/Home";
-import Parent from "./pages/Parent/Parent";
+import Parent from "./pages/Parent/parent";
 import ChildPage from "./pages/Child/Child";
-import MainPage from "./pages/MainPage.js";
-import ChildList from "./pages/ChildList.js";
+import ChildList from "./pages/Parent/ChildList/ChildList.js";
 import UsersSearch from "./pages/Admin/UsersSearch";
 import OrdersSearch from "./pages/Admin/OrdersSearch";
+import OrdersHistory from "./pages/OrdersHistory";
+import AdminPage from "./pages/Admin/AdminPage";
 
 function App() {
   return (

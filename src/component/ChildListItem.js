@@ -8,7 +8,6 @@ import Withdraw from "./WithdrawPopup";
 const ChildsListItem = (props) => {
   const { childsArray } = props;
 
-
   const columns = [
     {
       title: "Name",
@@ -29,11 +28,6 @@ const ChildsListItem = (props) => {
       title: "Access Date",
       dataIndex: "accessDateTimeStamp",
       key: "accessDateTimeStamp",
-    },
-    {
-      title: "Date Of Birth",
-      dataIndex: "dateOfBirthTimeStamp",
-      key: "dateOfBirthTimeStamp    ",
     },
     {
       title: "Balance",
@@ -60,7 +54,12 @@ const ChildsListItem = (props) => {
 
   return (
     <>
-      <Table columns={columns} dataSource={childsArray || []} />
+      <Table
+        className="ant-table table-margin"
+        size={"small"}
+        columns={columns}
+        dataSource={childsArray || []}
+      />
     </>
   );
 };

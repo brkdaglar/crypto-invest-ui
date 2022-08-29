@@ -2,8 +2,7 @@ import "antd/dist/antd.css";
 import React, { useState, useEffect } from "react";
 import { Button, Modal, Form, Input, Select, DatePicker } from "antd";
 
-import {getParent, storeETH} from "../shared/contractDeploy";
-
+import { getParent, storeETH } from "../shared/contractDeploy";
 
 const layout = {
   labelCol: {
@@ -49,7 +48,7 @@ const SendPopup = (props) => {
 
   const getParentObj = async () => {
     setParent(await getParent());
-  }
+  };
 
   useEffect(() => {
     getParentObj();
@@ -57,9 +56,14 @@ const SendPopup = (props) => {
 
   return (
     <div>
-      <Button type="primary" onClick={() => setTimeout(() => {
-        showModal()
-      }, 1000)}>
+      <Button
+        type="danger"
+        onClick={() =>
+          setTimeout(() => {
+            showModal();
+          }, 1000)
+        }
+      >
         Send
       </Button>
 
@@ -73,7 +77,10 @@ const SendPopup = (props) => {
       >
         <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
           <Form.Item name="parent" label="From" rules={[{ required: true }]}>
-            <Input disabled={true} placeholder={parent != undefined ? parent.addresses : ""} />
+            <Input
+              disabled={true}
+              placeholder={parent != undefined ? parent.addresses : ""}
+            />
           </Form.Item>
 
           <Form.Item name="To" label="To" rules={[{ required: true }]}>

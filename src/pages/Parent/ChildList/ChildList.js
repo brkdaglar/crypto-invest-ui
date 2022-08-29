@@ -1,16 +1,14 @@
 import { React, useEffect, useState } from "react";
 import "./ChildList.css";
 import {
-  getParent,
   getChildsFromParent,
   addChild,
-  getChild,
-} from "../shared/contractDeploy.js";
-import { Button, Modal, Form, Input, Select, DatePicker } from "antd";
+} from "../../../shared/contractDeploy.js";
+import { Button, Modal, Form, Input, DatePicker, PageHeader } from "antd";
 import "antd/dist/antd.css";
-import { isDisabled } from "@testing-library/user-event/dist/utils";
-import ChildsListItem from "../component/ChildListItem";
+import ChildsListItem from "../../../component/ChildListItem";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 const layout = {
   labelCol: {
@@ -34,6 +32,7 @@ const ChildList = () => {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
+  let navigate = useNavigate();
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -79,8 +78,7 @@ const ChildList = () => {
     setIsModalVisible(false);
     setTimeout(() => {
       loadChild();
-    }, 50000)
-
+    }, 50000);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -99,20 +97,40 @@ const ChildList = () => {
     setAccessDateOfBirth(timestampSecondsAccessDate);
   };
 
-  // Modaldaki alttaki iki buton kaldırılamadı.
+  const routes = [
+    {
+      path: "admin",
+      breadcrumbName: "Admin",
+    },
+    {
+      path: "userlist",
+      breadcrumbName: "UserList",
+    },
+  ];
+
   return (
     <div id="mainpage">
       <h1>
         {" "}
         <ins> CHILDREN </ins>{" "}
       </h1>
+      <PageHeader
+        className="site-page-header tx-header"
+        title="UserList Page"
+        breadcrumb={{
+          routes,
+        }}
+        style={{ backgroundColor: "white" }}
+        onBack={() => {
+          navigate("../admin", { replace: true });
+        }}
+        subTitle="Users Details"
+      />
+      <div>
+        <ChildsListItem className="table-margin" childsArray={childsArray} />
+      </div>
 
-      <table id="children">
-        <div>
-          <ChildsListItem childsArray={childsArray} />
-        </div>
-      </table>
-      <div className="">
+      <div className="button-margin">
         <Button
           type="primary"
           style={{ textAlign: "center" }}
