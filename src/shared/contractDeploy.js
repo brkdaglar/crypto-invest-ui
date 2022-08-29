@@ -9,13 +9,13 @@ const CONTRACT_ADDRESS = "0xB2887c51c705eBB159d930187A1CAeE60dAc6A4a";
 const API_KEY = "1HFBV46X2Y78BTUCJ6UVC4BMXJI2SEYI58";
 export const con = `${ENDPOINT}?module=logs&action=getLogs&fromBlock=379224&toBlock=latest&address=${CONTRACT_ADDRESS}&topic0=0xf63780e752c6a54a94fc52715dbc5518a3b4c3c2833d301a204226548a2a8545&apikey=${API_KEY}`;
 
-const API_Balance = `${ENDPOINT}?module=account&action=balance&address=${CONTRACT_ADDRESS}&tag=latest&apikey=${API_KEY}`;
+export const API_Balance = `${ENDPOINT}?module=account&action=balance&address=${CONTRACT_ADDRESS}&tag=latest&apikey=${API_KEY}`;
 export const API_Normal_Transaction = `${ENDPOINT}?module=account&action=txlist&address=${CONTRACT_ADDRESS}&startblock=0&endblock=99999999&sort=asc&apikey=${API_KEY};
 `;
 const API_log = `${ENDPOINT}?module=logs&action=getLogs&address=${CONTRACT_ADDRESS}&fromBlock=12878196&toBlock=12878196&page=1&offset=1000&apikey=${API_KEY}`;
 
 export let userAddress;
-export let roleValue;
+export let roleValue = 4;
 
 export const connectWalletHandler = async () => {
   let provider;
@@ -33,7 +33,7 @@ export const connectWalletHandler = async () => {
     contract = new ethers.Contract(CONTRACT_ADDRESS, abi, provider.getSigner());
     userAddress = await provider.getSigner().getAddress();
 
-    roleValue = addressControl(userAddress);
+    roleValue = await addressControl(userAddress);
 
     console.log(API_Balance);
     console.log(API_Normal_Transaction);

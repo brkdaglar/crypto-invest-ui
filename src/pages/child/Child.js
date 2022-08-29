@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getChild } from "../../shared/contractDeploy";
+import { getChild, childWithdraw } from "../../shared/contractDeploy";
 import "./Child.css";
 import dayjs from "dayjs";
 import ProfileComponent from "../../component/ProfileComponent";
@@ -52,7 +52,7 @@ const ChildPage = () => {
       <Content
         style={{ background: "#16357B", minHeight: "660px", marginTop: "60px" }}
       >
-        <ProfileComponent />
+        {/* <ProfileComponent />
         <div className="root">
           <div className="divParent">
             <div id="divKids" className="divButton">
@@ -64,8 +64,9 @@ const ChildPage = () => {
               <h4>Orders</h4>
             </div>
           </div>
-        </div>
-        {/* <div className="divChild">
+        </div> */}
+        <ProfileComponent />
+        <div className="divChild">
           <div id="divBalance">
             <div id="balance" />
             <h4>{child.balance}</h4>
@@ -89,7 +90,7 @@ const ChildPage = () => {
             <div id="date" />
             <h4>{child.accessDateTimeStamp}</h4>
           </div>
-        </div> */}
+        </div>
       </Content>
     </Layout>
   );

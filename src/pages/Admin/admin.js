@@ -1,27 +1,28 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "./admin.css";
-import line from "./line.png";
-import hash from "./hash.png";
-import { getParent } from "../../shared/contractDeploy";
-import logo from "../Home/logo-last.png";
-import { Button, Modal, Layout, Menu, Row, Col, Divider, Card } from "antd";
-import { useNavigate, useLocation } from "react-router-dom";
+import { API_Balance, roleValue } from "../../shared/contractDeploy";
+import { Button, Layout, Card, Statistic } from "antd";
+import { useNavigate } from "react-router-dom";
+import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
+import axios from "axios";
 
-const { Header, Content, Footer } = Layout;
+const { Content } = Layout;
 
-const ParentMenu = () => {
+const AdminMenu = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const [parent, setParent] = useState();
-
-  const getParentObj = async () => {
-    console.log("parent: ", parent);
-    setParent(await getParent());
-  };
+  const [balance, setBalance] = useState();
 
   useEffect(() => {
-    getParentObj();
+    const loadBalance = async () => {
+      const res = await axios.get(API_Balance);
+      if (roleValue == 0) {
+        console.log(roleValue);
+      }
+
+      setBalance(res.data.result);
+    };
+    loadBalance();
   }, []);
 
   return (
@@ -36,7 +37,7 @@ const ParentMenu = () => {
         >
           <div className="root">
             <Card
-              title="Admin"
+              title="Admin Panel"
               bordered={false}
               style={{
                 width: 300,
@@ -44,9 +45,16 @@ const ParentMenu = () => {
                 marginTop: "80px",
               }}
             >
-              <p>Card content</p>
-              <p>Card content</p>
-              <p>Card content</p>
+              <Statistic
+                title="Total Balance"
+                value={balance}
+                precision={2}
+                valueStyle={{
+                  color: "#3f8600",
+                }}
+                prefix={<ArrowUpOutlined />}
+                suffix={"wei"}
+              />
             </Card>
             <div className="div">
               <div id="divhash" className="hashbutton">
@@ -86,26 +94,4 @@ const ParentMenu = () => {
   );
 };
 
-export default ParentMenu;
-
-/*<div className="root">
-      <div className="divProfile">
-        <img src={require("./image.png")} width="150px" height="150px" />
-        <h4>{parent != undefined ? parent.firstName : "gelmedi"} {parent != undefined ? parent.lastName : "gelmedi"}</h4>
-        <div style={{ height: "7px", backgroundColor: "white", borderRadius: 5 }} />
-      </div>
-      <div className="div">
-        <div id="divhash" className="divButton">
-          <button id="hash"
-            onClick={() => navigate("/hash")} />
-          <h4>Hash</h4>
-        </div>  
-        <div id="diusers" className="divButton">
-          <button id="users"
-            onClick={() => navigate("/users")} />
-          <h4 className="userstext">Users</h4>
-        </div>
-      </div>
-      
-
-    </div>*/
+export default AdminMenu;

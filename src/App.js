@@ -12,7 +12,7 @@ import UsersSearch from "./pages/Admin/UsersSearch";
 import OrdersSearch from "./pages/Admin/OrdersSearch";
 import OrdersHistory from "./pages/OrdersHistory";
 import About from "./pages/About/about";
-import Admin from "./pages/Admin/admin";
+import AdminMenu from "./pages/Admin/admin.js";
 import HeaderLayout from "./component/header/header";
 import FooterLayout from "./component/footer/footer.js";
 
@@ -29,7 +29,7 @@ function App() {
             <Route path="/parent/orders" element={<OrdersHistory />} />
             <Route exact path="/child" element={<ChildPage />} />
             <Route exact path="/about" element={<About />} />
-            <Route exact path="/admin" element={<Admin />} />
+            <Route exact path="/admin" element={<AdminMenu />} />
             <Route exact path="/admin/userList" element={<UsersSearch />} />
             <Route exact path="/admin/ordersearch" element={<OrdersSearch />} />
           </Routes>
