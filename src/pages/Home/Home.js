@@ -208,8 +208,8 @@ function Home() {
 
         </div>
       </Content>
-
-      <Foot />
+      
+      <Footer />
     </Layout>
 
   );

@@ -1,5 +1,5 @@
 .home {
-  background-color: #001E6C;
+  background-color: #5089C6;
   height: 100vh;
 }
 
@@ -21,9 +21,9 @@ h1 {
 .logo {
   align-items: center;
   height: 500px;
-  width: 500 px;
+  width: 500px;
   position: absolute;
-  right: 50px;
+  right: 100px;
   top: 1470px;
 }
 
@@ -67,7 +67,7 @@ h1 {
 .metabuton {
   position: absolute;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  top: 1920px;
+  top: 450px;
   border-radius: 5cm;
   left: 200px;
   font-size: 25px;
@@ -76,6 +76,7 @@ h1 {
   color: white;
   border-color: #F89C35;
   line-height:30px;
+  
 }
 
 .example {
@@ -88,11 +89,11 @@ h1 {
 }
 
 .header {
-  background-color: #5089C6
+  background-color: #5089C6;
 }
 
 .menu {
-  background-color: #5089C6
+  background-color: #5089C6;
 }
 .aboutbutton{
   color: #001E6C;
@@ -110,10 +111,9 @@ h1 {
 }
 
 .div1pict {
-  /*height: 25%;
-  width: 20%;*/
   position: absolute;
   height: 75vmin;
+  width: 65vmin;
   right: 60px;
   top: 140px;
   border-radius: 5cm;
@@ -133,8 +133,8 @@ h1 {
   font-size: 50px;
 }
 .div2pict {
-  height: 200px;
-  width: 400px;
+  height: 75vmin;
+  width: 65vmin;
   position: absolute;
   height: 75vmin;
   left: 100px;
@@ -159,6 +159,7 @@ h1 {
 }
 .eth1 {
   height: 5vmin;
+  width: 5vmin;
   top: 942px;
   left: 600px;
   position: absolute;
@@ -172,6 +173,7 @@ h1 {
 }
 .eth2 {
   height: 5vmin;
+  width: 5vmin;
   top: 1020px;
   left: 600px;
   position: absolute;
@@ -185,6 +187,7 @@ h1 {
 }
 .eth3 {
   height: 5vmin;
+  width: 5vmin;
   top: 1118px;
   left: 600px;
   position: absolute;
@@ -198,6 +201,7 @@ h1 {
 }
 .eth4 {
   height: 5vmin;
+  width: 5vmin;
   top: 1204px;
   left: 600px;
   position: absolute;
@@ -243,6 +247,7 @@ h1 {
 
 .div4img1 {
   height: 65vmin;
+  width: 55vmin;
   top: 2300px;
   left: 30px;
   position: absolute;
@@ -250,6 +255,7 @@ h1 {
 
 .div4img2 {
   height: 65vmin;
+  width: 55vmin;
   top: 2300px;
   left: 500px;
   position: absolute;
@@ -257,6 +263,7 @@ h1 {
 
 .div4img3 {
   height: 65vmin;
+  width: 55vmin;
   top: 2300px;
   left: 980px;
   position: absolute;
