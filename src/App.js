@@ -13,11 +13,14 @@ import OrdersSearch from "./pages/Admin/OrdersSearch";
 import OrdersHistory from "./pages/OrdersHistory";
 import About from "./pages/About/about";
 import Admin from "./pages/Admin/admin";
+import HeaderLayout from "./component/header/header";
+import FooterLayout from "./component/footer/footer.js";
 
 function App() {
   return (
     <div>
       <div>
+        <HeaderLayout />
         <Router>
           <Routes>
             <Route exact path="/" element={<HomePage />} />
@@ -32,6 +35,7 @@ function App() {
           </Routes>
         </Router>
       </div>
+      <FooterLayout />
     </div>
   );
 }
