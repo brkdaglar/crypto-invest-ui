@@ -5,7 +5,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 
 export let contract;
 const ENDPOINT = "https://api-rinkeby.etherscan.io/api";
-const CONTRACT_ADDRESS = "0xdB593B5dEB34Ae8542C3BF35fDcD15DE15639ba4";
+const CONTRACT_ADDRESS = "0xB2887c51c705eBB159d930187A1CAeE60dAc6A4a";
 const API_KEY = "1HFBV46X2Y78BTUCJ6UVC4BMXJI2SEYI58";
 export const con = `${ENDPOINT}?module=logs&action=getLogs&fromBlock=379224&toBlock=latest&address=${CONTRACT_ADDRESS}&topic0=0xf63780e752c6a54a94fc52715dbc5518a3b4c3c2833d301a204226548a2a8545&apikey=${API_KEY}`;
 
@@ -53,6 +53,7 @@ export const addressControl = async (_address) => {
 export const addParent = async (_firstName, _lastName) => {
   try {
     const tx = await contract.addParent(_firstName, _lastName);
+    tx.wait();
     //console.log(tx);
   } catch (e) {
     if (e.reason.includes("user_already_exists")) {
@@ -92,6 +93,7 @@ export const getChild = async (_adres) => {
 export const storeETH = async (address, amount) => {
   console.log(address, " ", amount);
   const store = await contract.storeETH(address, { value: amount });
+  await store.wait();
   console.log(store);
 };
 
@@ -99,11 +101,13 @@ export const parentWithdraw = async (address, amount) => {
   console.log(address, " ", amount);
   const withdraw = await contract.parentWithdraw(address, amount);
   console.log(withdraw);
+  await withdraw.wait();
 };
 
 export const childWithdraw = async (date) => {
   const withdraw = await contract.childWithdraw(date);
   console.log(withdraw);
+  await withdraw.wait();
 };
 
 export const getAllParent = async () => {

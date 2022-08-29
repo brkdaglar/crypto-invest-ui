@@ -68,7 +68,7 @@ const ChildList = () => {
 
   const onFinish = async (values) => {
     console.log("Success", values);
-    addChild(
+    await addChild(
       values.childAddress,
       values.childFirstName,
       values.childLastName,
@@ -76,9 +76,7 @@ const ChildList = () => {
     );
     form.resetFields();
     setIsModalVisible(false);
-    setTimeout(() => {
-      loadChild();
-    }, 50000);
+    loadChild();
   };
 
   const onFinishFailed = (errorInfo) => {
