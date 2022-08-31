@@ -76,6 +76,7 @@ function Home() {
           position: "fixed",
           zIndex: 1,
           width: "100%",
+          background: "#5089C6",
         }}
       >
         <div className="logo" />
@@ -89,8 +90,12 @@ function Home() {
             </a>
           </Col>
           <Col span={9}></Col>
-          <Col span={4}>
-            <Menu className="menu" mode="horizontal">
+          <Col span={4} style={{ background: "#5089C6" }}>
+            <Menu
+              className="menu"
+              mode="horizontal"
+              style={{ background: "#5089C6" }}
+            >
               <a className="aboutbutton" href="#/about">
                 About&nbsp;&nbsp;&nbsp;&nbsp;
               </a>
@@ -126,7 +131,12 @@ function Home() {
                   />
                 </form>
               </Modal>
-              <Modal className="modal" title="Waiting" visible={isModalWait}>
+              <Modal
+                className="modal"
+                title="Waiting"
+                visible={isModalWait}
+                footer={null}
+              >
                 <Spin />
               </Modal>
             </Menu>
@@ -210,6 +220,11 @@ function Home() {
             className="metabuton"
             href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn"
             target="_blank"
+            style={{
+              background: "#F89C35",
+              borderColor: "#F89C35",
+              marginRight: "20px",
+            }}
           >
             Download Metamask Extension
           </Button>
@@ -235,8 +250,6 @@ function Home() {
           <h1 className="kolay ">EASY USE</h1>
         </div>
       </Content>
-
-      <Footer />
     </Layout>
   );
 }

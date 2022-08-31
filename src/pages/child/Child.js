@@ -54,7 +54,7 @@ const ChildPage = () => {
   return (
     <Layout>
       <Content
-        style={{ background: "#16357B", minHeight: "660px", marginTop: "60px" }}
+        style={{ background: "#16357B", minHeight: "700px", marginTop: "60px" }}
       >
         <ProfileComponent />
         <div className="divChild">

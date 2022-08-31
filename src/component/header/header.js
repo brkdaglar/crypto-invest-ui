@@ -11,6 +11,7 @@ const HeaderLayout = () => {
         position: "fixed",
         zIndex: 1,
         width: "100%",
+        background: "#5089C6",
       }}
     >
       <div className="logo" />
