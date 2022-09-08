@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import "./Parent.css";
 import kids from "./kids.png";
 
-import { getParent } from "../../shared/contractDeploy";
+import { getParent, getContract } from "../../shared/contractDeploy";
 import ProfileComponent from "../../component/ProfileComponent";
 
 import { useNavigate, useLocation } from "react-router-dom";
@@ -18,6 +18,7 @@ const ParentMenu = () => {
   const [parent, setParent] = useState();
 
   const getParentObj = async () => {
+    const cont = await getContract();
     setParent(await getParent());
   };
 

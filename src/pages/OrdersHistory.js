@@ -6,11 +6,14 @@ import {
   API_Normal_Transaction,
   getParent,
   userAddress,
+  getContract,
+  choosenAddress,
 } from "../shared/contractDeploy";
 import axios from "axios";
 import dayjs from "dayjs";
 import { Content } from "antd/lib/layout/layout";
 import { Navigate, useNavigate } from "react-router-dom";
+
 
 const data = [];
 
@@ -235,6 +238,7 @@ const OrdersHistory = () => {
   };
 
   const loadTransaction = async () => {
+    const cont = await getContract();
     const res = await axios.get(API_Normal_Transaction);
     //let a=await getParent();
     //let b=a.addresses.toString();
@@ -244,7 +248,7 @@ const OrdersHistory = () => {
     convertRelevantDate(res.data.result);
     setTxList(
       res.data.result
-        .filter((address) => address.from == userAddress.toLowerCase())
+        .filter((address) => address.from == choosenAddress.toLowerCase())
         .map((x) => ({
           ...x,
           date: dayjs.unix(parseInt(x.timeStamp)).format("DD/MM/YYYY"),
