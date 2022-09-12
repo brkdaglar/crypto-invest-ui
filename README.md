@@ -1,4 +1,4 @@
-Contract Repository : https://github.com/IntertechTeam3/crypto-invest-contract
+Contract Repository : https://github.com/brkdaglar/crypto-invest-contract
 
 
 # Getting Started with Create React App
