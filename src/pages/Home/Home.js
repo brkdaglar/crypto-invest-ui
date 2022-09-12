@@ -8,8 +8,7 @@ import "antd/dist/antd.css";
 import {
   connectWalletHandler,
   addParent,
-  getParent,
-  getChild,
+  roleValue,
 } from "../../shared/contractDeploy";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { Spin } from "antd";
@@ -18,9 +17,18 @@ import div2 from "./div2.png";
 import div3 from "./div3-1.png";
 import div32 from "./div3-2.png";
 import div33 from "./div3-3.png";
-import Foot from "../../component/footer/footer";
+import { RoleContext } from "../../shared/context";
 
-const { Header, Content, Footer } = Layout;
+const { Header, Content } = Layout;
+
+export let roleVal = 4;
+
+const Role = {
+  admin: 0,
+  child: 1,
+  parent: 2,
+  unregister: 3,
+};
 
 function Home() {
   // MODAL
@@ -31,13 +39,6 @@ function Home() {
   const [name, setName] = useState();
   const [surname, setSurname] = useState();
   let navigate = useNavigate();
-
-  const Role = {
-    admin: 0,
-    child: 1,
-    parent: 2,
-    unregister: 3,
-  };
 
   const showModal = async () => {
     const roleValue = await connectWalletHandler();

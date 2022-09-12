@@ -15,6 +15,7 @@ import About from "./pages/About/about";
 import AdminMenu from "./pages/Admin/admin.js";
 import HeaderLayout from "./component/header/header";
 import FooterLayout from "./component/footer/footer.js";
+import { useEffect, useState } from "react";
 import { roleValue } from "./shared/contractDeploy";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<HomePage />} />
             <Route exact path="/parent" element={<Parent />} />
+
             <Route path="/kids" element={<ChildList />} />
             <Route path="/parent/orders" element={<OrdersHistory />} />
             <Route exact path="/child" element={<ChildPage />} />

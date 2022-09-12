@@ -205,15 +205,11 @@ const OrdersHistory = () => {
   ];
   const convertRelevantDate = (list) => {
     for (let i = 0; i < list.length; i++) {
-      console.log(list);
       let date = new Date();
       let nowTimestamp = Math.floor(date.getTime() / 1000);
-      console.log(nowTimestamp);
-      console.log(parseInt(list[i].timeStamp));
       let txTimestamp = Math.floor(parseInt(list[i].timeStamp));
 
       let relevantTime = nowTimestamp - txTimestamp;
-      console.log(relevantTime);
       let output = ``;
       if (relevantTime < 60) {
         output = `${relevantTime} seconds ago`;
@@ -229,8 +225,6 @@ const OrdersHistory = () => {
         output = `${Math.floor(relevantTime / 31449600)} years ago`;
       }
       list[i].relevantDate = output;
-      console.log(list[i].relevantDate);
-      console.log();
     }
   };
 
