@@ -1,0 +1,16 @@
+.ok {
+    float: left;
+    background-color: #2a67a3;
+    padding: 10px;
+    width: 100%;
+
+}
+h1 {
+    font-weight:900;
+    font-style:inherit; 
+    color:black;}
+img{
+    width: 150px;
+    height: 150px;
+    
+}

@@ -1,0 +1,90 @@
+body {
+    background-color: #16357B;
+    height: 100vh;
+  }
+  
+  #hash {
+    height: 150px;
+    width: 150px;
+    background-image: url(../../assets/hash.png);
+    background-size: cover;
+    border: none;
+    border-radius: 50cm;
+    position: absolute;
+    top: 320px;
+    left: 985px;
+
+  }
+  
+  #users {
+    height: 150px;
+    width: 150px;
+    background-image: url(../../assets/users.png);
+    background-size: cover;
+    border: none;
+    position: absolute;
+    left: 500px;
+    border-radius: 250cm;
+    position: absolute;
+    top: 320px;
+  }
+  
+  .userstext {
+    position: absolute;
+    left: 550px;
+    top: 470px;
+  }
+
+  .divProfile {
+    text-align: center;
+    margin: 10px;
+    width: 15%;
+  }
+  
+
+  
+  .div {
+    text-align: center;
+    margin: 10px;
+    height: 200px;
+    margin-top: 100px;
+  }
+  
+  .divButton {
+    text-align: center;
+    margin: 10px;
+    width: 20%;
+  }
+  
+  #divhash {
+    float: right;
+    margin-right: 25%;
+  }
+  
+  #divusers{
+    float: left;
+    margin-left: 25%;
+  }
+
+  .line{
+    position: absolute;
+    top: 200px;
+    left: 50px;
+    width: 200px;
+  }
+
+  .admintext {
+    position: absolute;
+    top: 150px;
+    left: 40px;
+    width: 200px;
+    font-size: 20px;
+  }
+
+  .hashtext {
+    position: absolute;
+    left: 1020px;
+    top: 470px;
+  }
+
+  

@@ -1,0 +1,32 @@
+.ok {
+    background-color: #17357A;
+    padding: 5px;
+    text-align: center;
+}
+h1 {
+    left: 20px;
+    font-weight:900;
+    
+    font-style:inherit; 
+    color:azure;}
+img{
+    width: 150px;
+    height: 150px;
+    
+}
+
+.table-row-light {
+    background-color: #ffffff;
+}
+.table-row-dark {
+    background-color: #fbfbfb;
+}
+
+.user {
+    margin-left: 80px;
+    margin-right: 80px;
+}
+
+.ant-table-thead .ant-table-cell {
+  background-color: #5089C6;
+}

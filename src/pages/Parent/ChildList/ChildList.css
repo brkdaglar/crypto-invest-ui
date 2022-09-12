@@ -34,3 +34,14 @@
                 height:50px ;
                 position: center ;
       }
+
+  .table-margin{
+    margin-left: 80px;
+    margin-top: 80px;
+    margin-right: 80px;
+  }
+
+  .button-margin{
+    margin-left: 80px;
+    margin-right: 80px;
+  }

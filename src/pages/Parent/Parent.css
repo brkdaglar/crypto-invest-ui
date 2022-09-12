@@ -1,0 +1,47 @@
+body {
+  background-color: #001E6C;
+  height: 100vh;
+}
+
+#orders {
+  height: 150px;
+  width: 150px;
+  background-image: url(../../assets/orders.png);
+  background-size: cover;
+  border: none;
+}
+
+#kids {
+  height: 150px;
+  width: 150px;
+  background-image: url(../../assets/kids.png);
+  background-size: cover;
+  border: none;
+}
+
+.divProfile {
+  text-align: center;
+  margin: 10px;
+  width: 15%;
+}
+
+h4 {
+  color: white;
+  margin: 10px;
+}
+
+.divParent {
+  text-align: center;
+  margin: auto;
+  height: 200px;
+  width: 60%;
+  margin-top: 70px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.divButton {
+  text-align: center;
+  margin: 10px;
+  width: 20%;
+}

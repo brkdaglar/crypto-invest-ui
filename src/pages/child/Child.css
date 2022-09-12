@@ -1,0 +1,48 @@
+body {
+  background-color: #16357B;
+  height: 100vh;
+}
+
+#date {
+  height: 200px;
+  width: 200px;
+  background-image: url(../../assets/time-2.png);
+  background-size: cover;
+  border: none;
+  margin: auto;
+}
+
+#balance {
+  height: 200px;
+  width: 200px;
+  background-image: url(../../assets/Ethereum-Logo-PNG-Pic.png);
+  background-size: cover;
+  margin: auto;
+}
+
+#divDate {
+  float: right;
+  text-align: center;
+
+}
+
+#divBalance {
+  float: left;
+  text-align: center;
+}
+
+#divButton {
+  text-align: center;
+  margin: auto;
+}
+
+.divChild {
+  text-align: center;
+  margin: auto;
+  height: 200px;
+  width: 60%;
+  margin-top: 70px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
