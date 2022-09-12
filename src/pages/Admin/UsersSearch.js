@@ -17,7 +17,7 @@ import {
   getAllParent,
 } from "../../shared/contractDeploy";
 import "./UsersSearch.css";
-import users from "./users.png";
+import users from "../../assets/users.png";
 import { useNavigate } from "react-router-dom";
 
 const { Text, Link } = Typography;

@@ -1,26 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./about.css";
-import { Button, Modal, Layout, Menu, Row, Col, Divider, Collapse } from "antd";
-import logo from "../Home/logo-last.png";
-import facebook from "./Facebook.png";
-import instagram from "./instagram.png";
-import youtube from "./Youtube.png";
-import twitter from "./Twitter.png";
-import linkedin from "./Linkedin.png";
-import aylinhanım from "./AylinHanım.jpg";
-import oğuzhanbey from "./OğuzhanBey.jpg";
-import Arda from "./Arda.jpg";
-import Burak from "./Burak.jpg";
-import Elif from "./Elif.jpg";
-import Furkan from "./Furkan.jpg";
-import Kıvanc from "./Kıvanc.jpg";
-import Kubra from "./Kubra.jpg";
-import Reyta from "./Reyta.jpg";
-import Talu from "./Talu.jpg";
-import Kuter from "./Kuter.jpg";
+import { Layout, Divider, Collapse } from "antd";
+import aylinhanım from "../../assets/AylinHanım.jpg";
+import oğuzhanbey from "../../assets/OğuzhanBey.jpg";
+import Arda from "../../assets/Arda.jpg";
+import Burak from "../../assets/Burak.jpg";
+import Elif from "../../assets/Elif.jpg";
+import Furkan from "../../assets/Furkan.jpg";
+import Kıvanc from "../../assets/Kıvanc.jpg";
+import Kubra from "../../assets/Kubra.jpg";
+import Reyta from "../../assets/Reyta.jpg";
+import Talu from "../../assets/Talu.jpg";
+import Kuter from "../../assets/Kuter.jpg";
 
 import "antd/dist/antd.css";
-const { Header, Content, Footer } = Layout;
+const { Content } = Layout;
 const { Panel } = Collapse;
 function About() {
   return (

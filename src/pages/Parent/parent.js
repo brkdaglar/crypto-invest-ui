@@ -1,16 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "./Parent.css";
-import kids from "./kids.png";
+import kids from "../../assets/kids.png";
 
 import { getParent, getContract } from "../../shared/contractDeploy";
 import ProfileComponent from "../../component/ProfileComponent";
 
 import { useNavigate, useLocation } from "react-router-dom";
-import Foot from "../../component/footer/footer";
-import { Button, Modal, Layout, Menu, Row, Col, Divider } from "antd";
-import HeaderLayout from "../../component/header/header";
-const { Header, Content, Footer } = Layout;
+import { Layout } from "antd";
+const { Content } = Layout;
 
 const ParentMenu = () => {
   const navigate = useNavigate();

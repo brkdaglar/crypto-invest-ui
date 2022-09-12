@@ -1,23 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Home.css";
-import logo from "./logo-last.png";
-import metalogo from "./logo2.svg";
-import eth from "./ETH.png";
+import logo from "../../assets/logo-last.png";
+import metalogo from "../../assets/logo2.svg";
+import eth from "../../assets/ETH.png";
 import { Button, Modal, Layout, Menu, Row, Col, Divider } from "antd";
 import "antd/dist/antd.css";
-import {
-  connectWalletHandler,
-  addParent,
-  roleValue,
-} from "../../shared/contractDeploy";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { connectWalletHandler, addParent } from "../../shared/contractDeploy";
+import { useNavigate } from "react-router-dom";
 import { Spin } from "antd";
-import div1 from "./div1.png";
-import div2 from "./div2.png";
-import div3 from "./div3-1.png";
-import div32 from "./div3-2.png";
-import div33 from "./div3-3.png";
-import { RoleContext } from "../../shared/context";
+import div1 from "../../assets/div1.png";
+import div2 from "../../assets/div2.png";
+import div3 from "../../assets/div3-1.png";
+import div32 from "../../assets/div3-2.png";
+import div33 from "../../assets/div3-3.png";
 
 const { Header, Content } = Layout;
 

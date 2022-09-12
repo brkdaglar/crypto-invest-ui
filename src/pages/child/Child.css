@@ -6,7 +6,7 @@ body {
 #date {
   height: 200px;
   width: 200px;
-  background-image: url(./time-2.png);
+  background-image: url(../../assets/time-2.png);
   background-size: cover;
   border: none;
   margin: auto;
@@ -15,7 +15,7 @@ body {
 #balance {
   height: 200px;
   width: 200px;
-  background-image: url(./Ethereum-Logo-PNG-Pic.png);
+  background-image: url(../../assets/Ethereum-Logo-PNG-Pic.png);
   background-size: cover;
   margin: auto;
 }

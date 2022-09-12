@@ -4,18 +4,13 @@ import { Button, Input, Layout, Space, Table, Tag, PageHeader } from "antd";
 import React, { useRef, useState, useEffect } from "react";
 import {
   API_Normal_Transaction,
-  getParent,
-  userAddress,
   getContract,
   choosenAddress,
-} from "../shared/contractDeploy";
+} from "../../shared/contractDeploy";
 import axios from "axios";
 import dayjs from "dayjs";
 import { Content } from "antd/lib/layout/layout";
-import { Navigate, useNavigate } from "react-router-dom";
-
-
-const data = [];
+import { useNavigate } from "react-router-dom";
 
 const OrdersHistory = () => {
   const [searchText, setSearchText] = useState("");

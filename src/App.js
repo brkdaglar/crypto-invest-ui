@@ -1,22 +1,15 @@
-import {
-  HashRouter as Router,
-  Route,
-  Navigate,
-  Routes,
-} from "react-router-dom";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/Home/Home";
 import Parent from "./pages/Parent/parent";
 import ChildPage from "./pages/Child/Child";
 import ChildList from "./pages/Parent/ChildList/ChildList.js";
 import UsersSearch from "./pages/Admin/UsersSearch";
 import OrdersSearch from "./pages/Admin/OrdersSearch";
-import OrdersHistory from "./pages/OrdersHistory";
+import OrdersHistory from "./pages/Parent/OrdersHistory";
 import About from "./pages/About/about";
 import AdminMenu from "./pages/Admin/admin.js";
 import HeaderLayout from "./component/header/header";
 import FooterLayout from "./component/footer/footer.js";
-import { useEffect, useState } from "react";
-import { roleValue } from "./shared/contractDeploy";
 
 function App() {
   return (

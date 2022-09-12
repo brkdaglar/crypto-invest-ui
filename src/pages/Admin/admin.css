@@ -6,7 +6,7 @@ body {
   #hash {
     height: 150px;
     width: 150px;
-    background-image: url(./hash.png);
+    background-image: url(../../assets/hash.png);
     background-size: cover;
     border: none;
     border-radius: 50cm;
@@ -19,7 +19,7 @@ body {
   #users {
     height: 150px;
     width: 150px;
-    background-image: url(./users.png);
+    background-image: url(../../assets/users.png);
     background-size: cover;
     border: none;
     position: absolute;

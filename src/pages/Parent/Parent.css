@@ -6,7 +6,7 @@ body {
 #orders {
   height: 150px;
   width: 150px;
-  background-image: url(./orders.png);
+  background-image: url(../../assets/orders.png);
   background-size: cover;
   border: none;
 }
@@ -14,7 +14,7 @@ body {
 #kids {
   height: 150px;
   width: 150px;
-  background-image: url(./kids.png);
+  background-image: url(../../assets/kids.png);
   background-size: cover;
   border: none;
 }

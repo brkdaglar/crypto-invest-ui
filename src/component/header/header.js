@@ -18,7 +18,7 @@ const HeaderLayout = () => {
       <Row>
         <Col span={1}>
           <img
-            src={require("../../pages/Home/logo-last.png")}
+            src={require("../../assets/logo-last.png")}
             className="logo-last"
           />
         </Col>

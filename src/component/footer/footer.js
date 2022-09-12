@@ -1,13 +1,13 @@
-import { Button, Modal, Layout, Menu, Row, Col, Divider } from "antd";
-import React, { useState, useEffect } from "react";
-import facebook from "./Facebook.png";
-import instagram from "./instagram.png";
-import youtube from "./Youtube.png";
-import twitter from "./Twitter.png";
-import linkedin from "./Linkedin.png";
+import { Layout, Divider } from "antd";
+import React from "react";
+import facebook from "../../assets/Facebook.png";
+import instagram from "../../assets/instagram.png";
+import youtube from "../../assets/Youtube.png";
+import twitter from "../../assets/Twitter.png";
+import linkedin from "../../assets/Linkedin.png";
 import "./footer.css";
 
-const { Header, Content, Footer } = Layout;
+const { Footer } = Layout;
 
 function FooterLayout() {
   return (
