@@ -4,6 +4,7 @@ import abi from "../data/contract.json";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 export let contract;
+
 const ENDPOINT = "https://api-rinkeby.etherscan.io/api";
 const CONTRACT_ADDRESS = "0xB2887c51c705eBB159d930187A1CAeE60dAc6A4a";
 const API_KEY = "1HFBV46X2Y78BTUCJ6UVC4BMXJI2SEYI58";
@@ -16,6 +17,52 @@ const API_log = `${ENDPOINT}?module=logs&action=getLogs&address=${CONTRACT_ADDRE
 
 export let userAddress;
 export let roleValue = 4;
+export let choosenAddress;
+
+export const getContract = async () => {
+  if (window.contract) return window.contract;
+
+  if (await checkConnection()) {
+    await initContract();
+    return window.contract;
+  }
+
+  await connectMetamaskWallet();
+  return window.contract;
+};
+
+export const getchoosenAddress = async () => {
+  await getContract();
+  return choosenAddress;
+};
+
+const initContract = async () => {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
+  window.contract = new ethers.Contract(CONTRACT_ADDRESS, abi, signer);
+
+  choosenAddress = await signer.getAddress();
+};
+
+const checkConnection = async () => {
+  checkMetamaskisAvailable();
+
+  const accounts = await window.ethereum.request({ method: "eth_accounts" });
+  return accounts && accounts.length > 0;
+};
+
+const connectMetamaskWallet = async () => {
+  checkMetamaskisAvailable();
+
+  await window.ethereum.request({ method: "eth_requestAccounts" });
+  await initContract();
+};
+
+const checkMetamaskisAvailable = () => {
+  const available = window.ethereum && window.ethereum.isMetaMask;
+
+  if (!available) throw new Error("Need to install MetaMask");
+};
 
 export const connectWalletHandler = async () => {
   let provider;
@@ -67,7 +114,8 @@ export const addParent = async (_firstName, _lastName) => {
 };
 
 export const getParent = async () => {
-  const parent = await contract.getParent();
+  const cont = await getContract();
+  const parent = await cont.getParent();
   return parent;
 };
 
@@ -81,14 +129,16 @@ export const addChild = async (_adres, _firstName, _lastName, _accessDate) => {
   await tx.wait();
 };
 
-export const getChildsFromParent = async () => {
-  const childArray = await contract.getChildsFromParent();
+export const getChildsFromParent = async () => { 
+  const cont = await getContract();
+  const childArray = await cont.getChildsFromParent();
   console.log(childArray);
   return childArray;
 };
 
 export const getChild = async (_adres) => {
-  const child = await contract.getChild();
+  const cont = await getContract();
+  const child = await cont.getChild();
   return child;
 };
 
